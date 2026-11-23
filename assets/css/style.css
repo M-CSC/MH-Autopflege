@@ -498,6 +498,68 @@ a, button { cursor: pointer; touch-action: manipulation; }
 }
 .panel + .panel { margin-top: var(--space-8); }
 .js-tabs .panel + .panel { margin-top: 0; }
+
+/* Gleitende Unterstreichung (per JS positioniert) */
+.tabs { position: relative; }
+.tabs__indicator {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-glow);
+  transition: transform 450ms var(--ease-out), width 450ms var(--ease-out);
+  pointer-events: none;
+}
+.tabs.has-indicator .tab::after { display: none; }
+
+/* Weicher Wechsel: Desktop = Überblenden im selben Rasterfeld (keine Höhensprünge) */
+.js-tabs .panels { display: grid; }
+.js-tabs .panel {
+  grid-area: 1 / 1;
+  transition: opacity 350ms var(--ease-out), transform 450ms var(--ease-out), visibility 0s linear 350ms;
+}
+.js-tabs .panel:not(.is-active) {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+.js-tabs .panel.is-active {
+  transition: opacity 450ms var(--ease-out) 120ms, transform 600ms var(--ease-out) 120ms, visibility 0s;
+}
+.js-tabs .panel .media,
+.js-tabs .panel .price-item {
+  transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out);
+}
+.js-tabs .panel:not(.is-active) .media { opacity: 0; transform: scale(0.97); }
+.js-tabs .panel:not(.is-active) .price-item { opacity: 0; transform: translateY(10px); }
+.js-tabs .panel.is-active .media:nth-child(1) { transition-delay: 140ms; }
+.js-tabs .panel.is-active .media:nth-child(2) { transition-delay: 200ms; }
+.js-tabs .panel.is-active .media:nth-child(3) { transition-delay: 260ms; }
+.js-tabs .panel.is-active .media:nth-child(4) { transition-delay: 320ms; }
+.js-tabs .panel.is-active .price-item:nth-child(1) { transition-delay: 180ms; }
+.js-tabs .panel.is-active .price-item:nth-child(2) { transition-delay: 230ms; }
+.js-tabs .panel.is-active .price-item:nth-child(3) { transition-delay: 280ms; }
+.js-tabs .panel.is-active .price-item:nth-child(4) { transition-delay: 330ms; }
+.js-tabs .panel.is-active .price-item:nth-child(5) { transition-delay: 380ms; }
+
+/* Handy: inaktive Bereiche aus dem Layout nehmen (keine Leerräume), aktiven sanft einblenden */
+@media (max-width: 900px) {
+  .js-tabs .panel:not(.is-active) { display: none; }
+  .js-tabs .panel.is-active { animation: panel-in 500ms var(--ease-out) both; }
+  .js-tabs .panel.is-active .media,
+  .js-tabs .panel.is-active .price-item { animation: panel-in 550ms var(--ease-out) both; }
+  .js-tabs .panel.is-active .media:nth-child(2),
+  .js-tabs .panel.is-active .price-item:nth-child(2) { animation-delay: 60ms; }
+  .js-tabs .panel.is-active .media:nth-child(3),
+  .js-tabs .panel.is-active .price-item:nth-child(3) { animation-delay: 120ms; }
+  .js-tabs .panel.is-active .media:nth-child(4),
+  .js-tabs .panel.is-active .price-item:nth-child(4) { animation-delay: 180ms; }
+  .js-tabs .panel.is-active .price-item:nth-child(5) { animation-delay: 240ms; }
+}
+@keyframes panel-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .panel__title { margin-bottom: var(--space-3); }
 .js-tabs .panel__title { display: none; }
 
@@ -874,6 +936,8 @@ a, button { cursor: pointer; touch-action: manipulation; }
 .contact__facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: var(--space-5); color: var(--color-text-muted); font-size: 0.9375rem; }
 .contact__facts li { display: inline-flex; align-items: center; gap: 10px; }
 .contact__facts svg { width: 18px; height: 18px; color: var(--color-accent); }
+.contact__facts a { display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; transition: color var(--dur-fast); }
+.contact__facts a:hover { color: var(--color-text); }
 .contact__logo { justify-self: center; width: min(420px, 100%); height: auto; filter: drop-shadow(0 0 28px rgba(150, 170, 255, 0.18)); }
 
 @media (max-width: 900px) {
@@ -953,6 +1017,8 @@ a, button { cursor: pointer; touch-action: manipulation; }
 .legal p + p { margin-top: 12px; }
 .legal ul { list-style: disc; padding-left: 20px; margin-top: 8px; }
 .legal a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.legal__meta { margin-top: calc(var(--space-2) * -1); margin-bottom: var(--space-4); color: var(--color-text-subtle); }
+.legal strong { color: var(--color-text); }
 .legal .todo { padding: 1px 6px; border-radius: 2px; background: rgba(111, 135, 255, 0.16); color: #c6d0ff; }
 .legal .notice {
   margin-bottom: var(--space-4);

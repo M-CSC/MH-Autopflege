@@ -12,16 +12,18 @@ Admin- und Wartungsdoku.
 
 Keine Env-Variablen, keine Secrets. Alles steht im Markup bzw. in den CSS-Tokens.
 
-**Kontaktdaten** (in `index.html`: `#kontakt`, Footer, Handy-Aktionsleiste `.mobilebar`; außerdem Impressum/Datenschutz). WhatsApp-Links öffnen mit vorausgefülltem Text (`?text=…`).
+**Kontaktdaten** (in `index.html`: `#kontakt`, Footer, Handy-Aktionsleiste `.mobilebar`; außerdem `impressum.html`, `datenschutz.html`). WhatsApp-Links öffnen mit vorausgefülltem Text (`?text=…`).
 
-| Was | Wert / Status |
+| Was | Wert |
 |---|---|
-| Telefon | `0157 81280442` (`tel:+4915781280442`) |
-| WhatsApp | `https://wa.me/4915781280442` |
+| Inhaber | Markus Hopp |
+| Anschrift | Junkerstraße 45, 53567 Buchholz (Westerwald) – auf der Startseite nur der Ort |
+| Telefon / WhatsApp | `0157 81280442` (`tel:+4915781280442`, `https://wa.me/4915781280442`) |
+| E-Mail | `autopflege.detailingmh@gmail.com` |
 | Instagram | `https://www.instagram.com/mh_autopflege` |
-| E-Mail | **fehlt** – bei Bedarf im Kontaktbereich (`.contact__facts`) und Footer ergänzen |
-| Adresse | **fehlt** – Pflicht im Impressum, optional im Kontaktbereich |
-| Impressum/Datenschutz | markierte Angaben (`<span class="todo">`) ersetzen und rechtlich prüfen lassen |
+| Umsatzsteuer | Kleinunternehmer nach § 19 UStG (Hinweis im Impressum und bei den Preisen) |
+
+**Rechtstexte:** Impressum nach § 5 DDG / § 18 Abs. 2 MStV, Datenschutzerklärung beschreibt den tatsächlichen Stand (GitHub Pages, keine Cookies/Tracking, nur Links zu WhatsApp/Instagram, E-Mail über Gmail, Aufsicht RLP). Bei neuen Diensten (z. B. Formular, Karte, Analyse, Einbettungen) Datenschutzerklärung anpassen und CSP prüfen.
 
 **Design anpassen:** Farben/Abstände in `assets/css/style.css` unter `:root`. Akzentfarbe = `--color-accent` (aktuell Studio-Blau `#6b84ff`, 6:1 Kontrast auf Schwarz – bei Änderung mind. 4.5:1 einhalten).
 
@@ -113,8 +115,6 @@ GitHub Pages lässt Dateien ca. 10 Minuten im Browser-Cache. Damit nach einem De
 
 ### Offene Punkte
 
-- E-Mail und Adresse ergänzen (siehe Tabelle oben).
-- Impressum und Datenschutz vervollständigen und rechtlich prüfen lassen.
 - Original-Logodatei (SVG/PNG) – aktuell aus Foto freigestellt.
 - Weitere Fotos (z. B. Innenraum, Motorraum, Felgen) können die Bildblöcke der Leistungen ergänzen/ersetzen.
 - Domain festlegen.

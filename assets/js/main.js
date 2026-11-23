@@ -70,19 +70,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const tablist = document.querySelector('[role="tablist"]');
   const tabs = tablist ? [...tablist.querySelectorAll('[role="tab"]')] : [];
   const panels = tabs.map((t) => document.getElementById(t.getAttribute("aria-controls")));
+  let indicator = null;
+  const moveIndicator = () => {
+    const tab = tabs.find((t) => t.getAttribute("aria-selected") === "true");
+    if (!indicator || !tab) return;
+    indicator.style.width = tab.offsetWidth + "px";
+    indicator.style.transform = "translateX(" + tab.offsetLeft + "px)";
+  };
   const selectTab = (index, focus) => {
     tabs.forEach((tab, i) => {
       const active = i === index;
       tab.setAttribute("aria-selected", String(active));
       tab.tabIndex = active ? 0 : -1;
-      panels[i].hidden = !active;
+      panels[i].classList.toggle("is-active", active);
+      panels[i].inert = !active; // inaktive Bereiche nicht fokussier-/vorlesbar
     });
+    moveIndicator();
     if (focus) tabs[index].focus();
   };
   if (tabs.length) {
     tablist.closest(".section").classList.add("js-tabs");
     tablist.hidden = false;
+    indicator = document.createElement("span");
+    indicator.className = "tabs__indicator";
+    indicator.setAttribute("aria-hidden", "true");
+    tablist.appendChild(indicator);
+    tablist.classList.add("has-indicator");
     selectTab(0, false);
+    window.addEventListener("resize", moveIndicator);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveIndicator);
     tabs.forEach((tab, i) => {
       tab.addEventListener("click", () => selectTab(i, false));
       tab.addEventListener("keydown", (e) => {
