@@ -859,6 +859,16 @@ a, button { cursor: pointer; touch-action: manipulation; }
   font-size: 0.875rem;
   color: var(--color-text-subtle);
 }
+.built-by a {
+  display: inline-block;
+  padding-block: 12px;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-line-strong);
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast), text-decoration-color var(--dur-fast);
+}
+.built-by a:hover { color: var(--color-text); text-decoration-color: currentColor; }
 .footer-legal { display: flex; gap: var(--space-3); }
 .footer-legal a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--dur-fast); }
 .footer-legal a:hover { color: var(--color-text); }
