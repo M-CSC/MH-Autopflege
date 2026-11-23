@@ -89,9 +89,9 @@ Neues Reel:
    ```bash
    curl -s "https://www.instagram.com/p/<ID>/" | grep -o '<meta property="og:image" content="[^"]*"'
    ```
-   Bild-URL herunterladen (`&amp;` → `&`), als WebP 9:16 speichern (Metadaten entfernen):
+   Bild-URL herunterladen (`&amp;` → `&`). Instagram liefert 360×640 mit schwarzen Balken; der eigentliche Inhalt ist der mittlere 3:4-Bereich. Als WebP 3:4 speichern (Metadaten entfernen):
    ```bash
-   ffmpeg -i cover.jpg -vf "scale=360:640:force_original_aspect_ratio=increase,crop=360:640" -c:v libwebp -quality 82 -map_metadata -1 assets/img/reels/<name>.webp
+   ffmpeg -i cover.jpg -vf "crop=iw:iw*4/3,scale=360:480" -c:v libwebp -quality 84 -map_metadata -1 assets/img/reels/<name>.webp
    ```
    Alternativ Screenshot aus der App verwenden.
 3. In `index.html` im Block `.reels` ein `<li>` kopieren, `href`, `aria-label` und Bildpfad anpassen. „Alle Reels“ bleibt die letzte Kachel.

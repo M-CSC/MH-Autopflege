@@ -689,7 +689,7 @@ a, button { cursor: pointer; touch-action: manipulation; }
 .reels {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: clamp(170px, 19vw, 250px);
+  grid-auto-columns: clamp(200px, 21vw, 280px);
   gap: 12px;
   padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2));
   overflow-x: auto;
@@ -703,7 +703,7 @@ a, button { cursor: pointer; touch-action: manipulation; }
 .reel {
   position: relative;
   display: block;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--color-surface);
