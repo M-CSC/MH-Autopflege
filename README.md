@@ -16,3 +16,4 @@ Danach http://localhost:8080 öffnen. Ein lokaler Server ist nötig, weil Videos
 
 - [CODEINFO.md](./CODEINFO.md) — Code-Struktur und Aufbau
 - [DOKU.md](./DOKU.md) — Admin- und Wartungsdoku (Deployment, Inhalte pflegen, Bilder/Videos, offene Punkte)
+- [CLAUDE.md](./CLAUDE.md) — Befehle und verbindliche Konventionen für Claude (u. a. Footer-Credit „Built by M-CSC“)
