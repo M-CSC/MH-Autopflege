@@ -768,6 +768,30 @@ a, button { cursor: pointer; touch-action: manipulation; }
   transition: transform var(--dur) var(--ease-out);
 }
 .reel__arrow svg { width: 18px; height: 18px; transform: rotate(-45deg); }
+/* Kachel mit Instagram-Cover: nur dezenter Hinweis unten */
+.reel__cta {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(7, 7, 8, 0.55);
+  backdrop-filter: blur(6px);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+}
+.reel__cta svg { width: 16px; height: 16px; }
+.reel:not(.reel--text):not(.reel--all)::after { background: linear-gradient(0deg, rgba(7, 7, 8, 0.6) 0%, rgba(7, 7, 8, 0) 22%); }
+
 /* Kachel ohne Vorschaubild: Modellname auf Hex-Muster */
 .reel--text {
   border: 1px solid var(--color-line);
@@ -807,6 +831,7 @@ a, button { cursor: pointer; touch-action: manipulation; }
   .reel:hover > img:first-child { transform: scale(1.05); }
   .reel:hover .reel__play { background: var(--color-btn); border-color: var(--color-btn); color: var(--color-btn-text); }
   .reel--text:hover { border-color: var(--color-line-strong); }
+  .reel:hover .reel__cta { background: var(--color-btn); border-color: var(--color-btn); color: var(--color-btn-text); }
   .reel--all:hover { border-color: var(--color-text); }
 }
 

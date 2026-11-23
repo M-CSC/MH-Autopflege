@@ -81,18 +81,22 @@ ffmpeg -i foto.jpg -vf "scale=720:900:force_original_aspect_ratio=increase,crop=
 
 ### Reels (Instagram-Links)
 
-In der Galerie gibt es eine Reihe „Reels“: Kacheln, die direkt auf den jeweiligen Instagram-Beitrag verlinken (auf dem Handy öffnet sich die Instagram-App). Es wird nichts von Instagram eingebettet – keine Meta-Skripte, kein Cookie-Banner nötig. Aktuell verlinkt: BMW M4, GLC 63 S AMG, BMW M2, Piaggio, SQ5 sowie „Alle Reels“.
+In der Galerie gibt es eine Reihe „Reels“: Kacheln mit dem Instagram-Cover, die direkt auf den jeweiligen Beitrag verlinken (auf dem Handy öffnet sich die Instagram-App). Es wird nichts von Instagram eingebettet – Cover liegen lokal unter `assets/img/reels/`, keine Meta-Skripte, kein Cookie-Banner nötig. Aktuell: BMW M4, GLC 63 S AMG, BMW M2, Piaggio, SQ5 sowie „Alle Reels“.
 
-Ohne Vorschaubild zeigt die Kachel den Modellnamen auf dem Hex-Muster (`reel--text`). Neues Reel:
-1. Link holen: in Instagram beim Beitrag auf „Teilen“ → „Link kopieren“.
-2. In `index.html` im Block `.reels` ein `<li>` kopieren, `href`, `aria-label` und Namen anpassen. „Alle Reels“ bleibt die letzte Kachel.
-3. Optional Vorschaubild 9:16 (540×960) aus Video oder Screenshot erzeugen, als erstes Element im `<a>` einfügen und `reel--text` entfernen:
+Neues Reel:
+1. Link holen: in Instagram beim Beitrag „Teilen“ → „Link kopieren“.
+2. Cover besorgen: Die öffentliche Beitragsseite enthält das Vorschaubild im Meta-Tag `og:image` (normaler Abruf, ohne Login):
    ```bash
-   ffmpeg -i screenshot.jpg -vf "scale=540:960:force_original_aspect_ratio=increase,crop=540:960" -c:v libwebp -quality 76 -map_metadata -1 assets/img/reels/bmw-m4.webp
+   curl -s "https://www.instagram.com/p/<ID>/" | grep -o '<meta property="og:image" content="[^"]*"'
    ```
-   ```html
-   <img src="assets/img/reels/bmw-m4.webp" width="540" height="960" loading="lazy" decoding="async" alt="">
+   Bild-URL herunterladen (`&amp;` → `&`), als WebP 9:16 speichern (Metadaten entfernen):
+   ```bash
+   ffmpeg -i cover.jpg -vf "scale=360:640:force_original_aspect_ratio=increase,crop=360:640" -c:v libwebp -quality 82 -map_metadata -1 assets/img/reels/<name>.webp
    ```
+   Alternativ Screenshot aus der App verwenden.
+3. In `index.html` im Block `.reels` ein `<li>` kopieren, `href`, `aria-label` und Bildpfad anpassen. „Alle Reels“ bleibt die letzte Kachel.
+
+Ohne Cover gibt es die Variante `reel--text` (Modellname auf Hex-Muster, Markup siehe Kommentar in `index.html` bzw. CSS `.reel--text`).
 
 ### Logo
 
