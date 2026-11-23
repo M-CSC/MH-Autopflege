@@ -12,15 +12,16 @@ Admin- und Wartungsdoku.
 
 Keine Env-Variablen, keine Secrets. Alles steht im Markup bzw. in den CSS-Tokens.
 
-**Platzhalter, die vor dem Livegang ersetzt werden müssen** (`grep -rn "000000\|example.com\|Musterstra" *.html`):
+**Kontaktdaten** (in `index.html` Hero-Infoleiste, `#kontakt` und Footer; außerdem Impressum/Datenschutz):
 
-| Was | Wo |
+| Was | Wert / Status |
 |---|---|
-| Telefonnummer (`tel:+490000000000`, Anzeige `+49 000 000000`) | `index.html`, Abschnitt `#kontakt` (3 Stellen) und Footer |
-| WhatsApp (`https://wa.me/490000000000`) | `index.html`, `#kontakt` |
-| E-Mail (`info@example.com`) | `index.html`, `#kontakt` (2 Stellen) und Footer |
-| Adresse (`Musterstraße 1, 00000 Musterstadt`) | `index.html`, `#kontakt` und Footer |
-| Alle markierten Angaben (`<span class="todo">`) | `impressum.html`, `datenschutz.html` – danach rechtlich prüfen lassen |
+| Telefon | `0157 81280442` (`tel:+4915781280442`) |
+| WhatsApp | `https://wa.me/4915781280442` |
+| Instagram | `https://www.instagram.com/mh_autopflege` |
+| E-Mail | **fehlt** – bei Bedarf im Kontaktbereich eine weitere `<div class="contact__item">` ergänzen |
+| Adresse | **fehlt** – Pflicht im Impressum, optional im Kontaktbereich |
+| Impressum/Datenschutz | markierte Angaben (`<span class="todo">`) ersetzen und rechtlich prüfen lassen |
 
 **Design anpassen:** Farben/Abstände in `assets/css/style.css` unter `:root`. Akzentfarbe = `--color-accent` (aktuell Studio-Blau `#6b84ff`, 6:1 Kontrast auf Schwarz – bei Änderung mind. 4.5:1 einhalten).
 
@@ -39,39 +40,32 @@ Eigene Domain (optional): in Settings → Pages eintragen, beim DNS-Anbieter `CN
 
 ## Inhalte pflegen
 
-- **Texte & Preise:** direkt in `index.html`. Pro Leistung ein `<li class="service">`; Preis in `<p class="service__price"><small>ab</small>25&nbsp;€</p>`. Die Zeile „x Leistungen ab y €“ in `.category__intro` bei Änderungen mitziehen.
-- **Neue Leistung:** vorhandenes `<li class="service">` kopieren, Bildpfad/Alt-Text/Titel/Text/Preis anpassen.
+- **Texte & Preise:** direkt in `index.html`. Pro Leistung ein `<li class="price-item">`; Preis in `<p class="price-item__price"><small>ab</small>25&nbsp;€</p>`. Die Angabe „x Leistungen“ in `.svc__meta` bei Änderungen mitziehen.
+- **Neue Leistung:** vorhandenes `<li class="price-item">` kopieren und Name/Text/Preis anpassen. Pakete: `<article class="plan">`.
 
 ### Bilder
 
-Format WebP, Hochformat 4:5. Dateinamen und Status: `assets/img/README.txt`. Fehlt eine Datei, erscheint automatisch eine Icon-Kachel (`<span class="media__icon">` im jeweiligen `.media`) – sobald das Foto da ist, wird es statt der Kachel angezeigt, kein Code-Eingriff nötig.
+Format WebP. Dateinamen und Formate: `assets/img/README.txt`. Fehlt eine Datei, erscheint automatisch eine Icon-Kachel (`<span class="media__icon">` im jeweiligen `.media`) – sobald das Foto da ist, wird es statt der Kachel angezeigt, kein Code-Eingriff nötig.
 
 ```bash
-ffmpeg -i foto.jpg -vf "scale=600:750:force_original_aspect_ratio=increase,crop=600:750" -c:v libwebp -quality 78 -map_metadata -1 assets/img/leistungen/polster.webp
+ffmpeg -i foto.jpg -vf "scale=640:640:force_original_aspect_ratio=increase,crop=640:640" -c:v libwebp -quality 78 -map_metadata -1 assets/img/leistungen/aussen-1.webp
 ```
 
-`-map_metadata -1` entfernt EXIF-Daten (u. a. GPS-Position aus Handyfotos). Großformate: `hero.webp` 1120×1400, `about.webp` 1040×1300, `pakete.webp` 1050×1400.
+`-map_metadata -1` entfernt EXIF-Daten (u. a. GPS-Position aus Handyfotos). Formate: Außen quadratisch 640×640, Innen 640×800, Zusatz 800×1000, `about.webp` 1040×1300, `hero.webp` (Kontaktbild) 1120×1400.
 
-### Videos
+### Video (Hero-Hintergrund)
 
-iPhone-Videos (`.MOV`, HEVC) laufen nicht in allen Browsern → immer nach H.264-MP4 umwandeln:
-
-```bash
-# Galerie-Video mit Ton
-ffmpeg -i IMG_XXXX.MOV -vf "scale=1080:1920:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 25 -r 30 -c:a aac -b:a 128k -movflags +faststart -map_metadata -1 assets/videos/video-2.mp4
-```
+Das Video läuft stumm und in Dauerschleife vollflächig hinter dem Startbereich (`assets/videos/hero.mp4`, Standbild `hero-poster.webp`). Bei „Bewegung reduzieren“ oder Datensparmodus bleibt das Standbild stehen. iPhone-Videos (`.MOV`, HEVC) laufen nicht in allen Browsern → nach H.264-MP4 umwandeln:
 
 ```bash
-# Hero-Hintergrund (stumm, klein)
-ffmpeg -i IMG_XXXX.MOV -an -vf "scale=720:1280:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 27 -r 30 -movflags +faststart -map_metadata -1 assets/videos/hero.mp4
+ffmpeg -i IMG_XXXX.MOV -an -vf "scale=1080:1920:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 28 -r 30 -movflags +faststart -map_metadata -1 assets/videos/hero.mp4
 ```
 
 ```bash
-# Poster (Standbild bei Sekunde 6)
-ffmpeg -ss 6 -i IMG_XXXX.MOV -frames:v 1 -vf "scale=720:1280" -c:v libwebp -quality 78 assets/videos/video-2-poster.webp
+ffmpeg -ss 0.8 -i IMG_XXXX.MOV -frames:v 1 -vf "scale=1080:1920:flags=lanczos" -c:v libwebp -quality 72 -map_metadata -1 assets/videos/hero-poster.webp
 ```
 
-Weiteres Video einbinden: in `index.html` im Block `#videos` die `<figure class="video">` kopieren und Dateinamen/Beschriftung anpassen. Größe pro Datei möglichst < 10 MB halten (Repo-Größe, Ladezeit).
+Ziel: < 5 MB, 10–20 Sekunden, ruhige Bewegung. Durch das Overlay wird das Video stark abgedunkelt.
 
 ## Betrieb & Wartung
 
@@ -80,10 +74,10 @@ Weiteres Video einbinden: in `index.html` im Block `#videos` die `<figure class=
 
 ### Offene Punkte
 
-- Kontaktdaten eintragen (siehe Tabelle oben).
+- E-Mail und Adresse ergänzen (siehe Tabelle oben).
 - Impressum und Datenschutz vervollständigen und rechtlich prüfen lassen.
 - Logo als Datei (SVG oder PNG mit transparentem Hintergrund) – aktuell Text-Wortmarke im Header.
-- Fehlende Fotos: Basis-Innenreinigung, Polsterreinigung, Geruchsentfernung, Motorreinigung, Felgenversiegelung, Cabrio-Verdeck.
+- Weitere Fotos (z. B. Innenraum, Motorraum, Felgen) können die Bildblöcke der Leistungen ergänzen/ersetzen.
 - Domain festlegen.
 
 ## Troubleshooting
@@ -91,7 +85,6 @@ Weiteres Video einbinden: in `index.html` im Block `#videos` die `<figure class=
 | Problem | Ursache → Lösung |
 |---|---|
 | Statt Foto erscheint Icon-Kachel | Datei fehlt oder Name falsch → mit `assets/img/README.txt` abgleichen (Groß-/Kleinschreibung beachten). |
-| Video-Sektion fehlt | Keines der Videos ladbar → Pfad/Format prüfen (H.264-MP4, siehe oben). |
 | Video läuft in Chrome/Firefox nicht, in Safari schon | HEVC-Datei → mit `ffmpeg` nach H.264 umwandeln. |
 | Hero-Video startet nicht | Gewollt bei „Bewegung reduzieren“ (Betriebssystem) oder Datensparmodus – dann bleibt das Hero-Bild. |
 | Pages liefert 404 | Settings → Pages → Source muss „GitHub Actions“ sein; Workflow-Lauf unter „Actions“ prüfen. |

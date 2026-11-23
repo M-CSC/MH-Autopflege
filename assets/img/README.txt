@@ -1,20 +1,10 @@
-Bilder für die Webseite (WebP). Fehlt eine Datei, zeigt die Seite automatisch eine Icon-Kachel.
+Bilder für die Webseite (WebP, EXIF entfernt). Fehlt eine Datei, bleibt der Bildrahmen neutral dunkel.
 Umwandeln/Zuschneiden: siehe DOKU.md, Abschnitt "Bilder".
 
-hero.webp        Startbild (Hochformat 4:5, ca. 1120x1400) – auch im Kontaktbereich
-about.webp       Bild "Über uns" (4:5, ca. 1040x1300)
-pakete.webp      Bild Komplettpakete (3:4, ca. 1050x1400)
+about.webp            "Über uns" (4:5, 1040x1300)
+hero.webp             Kontaktbereich – Foto mit Leuchtlogo (4:5, 1121x1403)
 
-leistungen/  (4:5, 600x750, < 100 KB)
-  handwaesche.webp        vorhanden
-  politur.webp            vorhanden
-  nanoversiegelung.webp   vorhanden
-  scheinwerfer.webp       vorhanden
-  innen-basis.webp        FEHLT
-  innen-intensiv.webp     vorhanden
-  polster.webp            FEHLT
-  leder.webp              vorhanden
-  geruch.webp             FEHLT
-  motor.webp              FEHLT
-  felgen.webp             FEHLT
-  cabrio.webp             FEHLT
+leistungen/
+  aussen-1..4.webp    Außenreinigung, 2x2-Raster (quadratisch, 640x640)
+  innen-1..2.webp     Innenreinigung (4:5, 640x800)
+  zusatz-1.webp       Zusatzleistungen (4:5, 800x1000)

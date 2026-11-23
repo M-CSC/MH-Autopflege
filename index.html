@@ -33,9 +33,9 @@
 
       <nav class="nav" id="site-nav" aria-label="Hauptnavigation">
         <ul class="nav__list">
+          <li><a class="nav__link" href="#ueber">Über uns</a></li>
           <li><a class="nav__link" href="#leistungen">Leistungen</a></li>
           <li><a class="nav__link" href="#pakete">Pakete</a></li>
-          <li data-video-link hidden><a class="nav__link" href="#videos">Videos</a></li>
           <li><a class="nav__link" href="#kontakt">Kontakt</a></li>
         </ul>
         <a class="btn btn--primary btn--sm" href="#kontakt">Termin vereinbaren</a>
@@ -45,437 +45,308 @@
 
   <main id="main">
 
-    <!-- Hero: Bild assets/img/hero.webp, optional Video assets/videos/hero.mp4 -->
+    <!-- Hero: Hintergrundvideo assets/videos/hero.mp4 (Poster: hero-poster.webp) -->
     <section class="hero" id="top">
-      <div class="hero__media">
-        <img src="assets/img/hero.webp" width="1121" height="1403" fetchpriority="high"
-             alt="Fahrzeugaufbereiter vor einem Lexus unter dem beleuchteten Logo von MH Autopflege">
-        <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true"
+      <div class="hero__media" aria-hidden="true">
+        <img src="assets/videos/hero-poster.webp" width="1080" height="1920" alt="" fetchpriority="high">
+        <video class="hero__video" muted loop playsinline preload="none"
                data-hero-video data-src="assets/videos/hero.mp4"></video>
       </div>
 
-      <div class="container">
+      <div class="container hero__inner">
         <div class="hero__content">
-          <span class="label label--accent hero__kicker">Willkommen bei MH Autopflege</span>
-          <h1 class="hero__title h-xl">Ihre Experten für <span>Fahrzeug&shy;aufbereitung</span></h1>
-          <div class="hero__text lead">
-            <p>Bei MH Autopflege sind wir leidenschaftlich auf die Fahrzeugreinigung spezialisiert.</p>
-            <p>Wir bieten umfassende Dienstleistungen an, die auf individuelle Bedürfnisse zugeschnitten sind.</p>
-            <p>Unser Ziel ist es, den Wert und das Aussehen Ihres Fahrzeugs zu maximieren.</p>
-          </div>
+          <span class="label">Willkommen bei MH Autopflege</span>
+          <h1 class="hero__title">Ihre Experten für Fahrzeug&shy;aufbereitung</h1>
+          <p class="hero__services">Handwäsche <span aria-hidden="true">·</span> Innenreinigung <span aria-hidden="true">·</span> Politur <span aria-hidden="true">·</span> Versiegelung</p>
+          <p class="hero__text">Bei MH Autopflege sind wir leidenschaftlich auf die Fahrzeugreinigung spezialisiert – mit dem Ziel, Wert und Aussehen Ihres Fahrzeugs zu maximieren.</p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#kontakt">
-              Jetzt Termin vereinbaren
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <a class="btn btn--primary" href="#kontakt">Jetzt Termin vereinbaren <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="btn btn--outline" href="#leistungen">Leistungen &amp; Preise</a>
           </div>
         </div>
+      </div>
+
+      <div class="container">
+        <ul class="hero__bar">
+          <li><strong>500</strong><span>Zufriedene Kunden</span></li>
+          <li><strong>1.200</strong><span>Fahrzeuge gepflegt</span></li>
+          <li><strong>Hol- &amp; Bringservice</strong><span>Verfügbar</span></li>
+          <li><a href="tel:+4915781280442"><strong>0157 81280442</strong><span>Jetzt anrufen</span></a></li>
+        </ul>
       </div>
     </section>
 
     <!-- Über uns -->
     <section class="section" id="ueber">
       <div class="container about">
-        <div class="about__media">
+        <div class="about__media media">
           <img src="assets/img/about.webp" width="1040" height="1300" loading="lazy" decoding="async"
                alt="Lackpolitur mit Exzenter-Poliermaschine an einem dunkelblauen Fahrzeug">
         </div>
-
-        <div class="about__text">
-          <span class="label label--accent">Glänzende Fahrzeuge, zufriedene Kunden</span>
-          <h2 class="about__title h-lg">Erleben Sie professionelle Fahrzeug&shy;aufbereitung</h2>
+        <div>
+          <span class="label">Glänzende Fahrzeuge, zufriedene Kunden</span>
+          <h2 class="h-lg">Erleben Sie professionelle Fahrzeug&shy;aufbereitung</h2>
           <p class="lead">MH Autopflege steht für hochwertige Fahrzeugreinigung – von der schonenden Handwäsche über professionelle Innenreinigung bis hin zu Politur und Langzeitversiegelung. Für sichtbaren Glanz und echten Werterhalt.</p>
-
-          <ul class="facts">
-            <li class="fact">
-              <span class="fact__value">500</span>
-              <span class="fact__label">Zufriedene Kunden</span>
-              <span class="fact__sub">Zuverlässig, hochwertig</span>
-            </li>
-            <li class="fact">
-              <span class="fact__value">1.200</span>
-              <span class="fact__label">Fahrzeuge gepflegt</span>
-              <span class="fact__sub">Innen &amp; außen</span>
-            </li>
+          <ul class="checks">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Schonende Handwäsche</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Professionelle Innenreinigung</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Politur &amp; Langzeitversiegelung</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Hol- &amp; Bringservice verfügbar</li>
           </ul>
-
-          <a class="link-arrow" href="#kontakt">
-            Jetzt Termin vereinbaren
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+          <a class="btn btn--primary" href="#kontakt">Jetzt Termin vereinbaren <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
     </section>
 
     <!-- Leistungen -->
-    <section class="section" id="leistungen">
+    <section class="section section--alt" id="leistungen">
       <div class="container">
         <header class="section-head">
-          <span class="label label--accent">Leistungen</span>
-          <h2 class="h-lg">Unsere Dienst&shy;leistungen</h2>
+          <span class="label">Leistungen</span>
+          <h2 class="h-lg">Unsere Dienstleistungen</h2>
           <p class="lead">Entdecken Sie, was MH Autopflege zu bieten hat.</p>
         </header>
 
-        <nav class="jump" aria-label="Leistungsbereiche">
-          <a href="#aussen"><span>01</span>Außenreinigung</a>
-          <a href="#innen"><span>02</span>Innenreinigung</a>
-          <a href="#pakete"><span>03</span>Komplettpakete</a>
-          <a href="#zusatz"><span>04</span>Zusatzleistungen</a>
+        <nav class="tabs" aria-label="Leistungsbereiche">
+          <a href="#aussen">Außenreinigung</a>
+          <a href="#innen">Innenreinigung</a>
+          <a href="#zusatz">Zusatzleistungen</a>
+          <a href="#pakete">Komplettpakete</a>
         </nav>
 
-        <!-- 01 Außenreinigung -->
-        <div class="category" id="aussen">
-          <div class="category__aside">
-            <span class="category__num">01</span>
-            <h3 class="h-md">Außen&shy;reinigung</h3>
-            <p class="category__intro">4 Leistungen ab 25&nbsp;€</p>
+        <!-- Außenreinigung -->
+        <div class="svc" id="aussen">
+          <div class="svc__media mosaic">
+            <div class="media"><img src="assets/img/leistungen/aussen-1.webp" width="640" height="640" loading="lazy" decoding="async" alt="Frisch gewaschener weißer BMW von hinten unter Hexagon-Beleuchtung"></div>
+            <div class="media"><img src="assets/img/leistungen/aussen-2.webp" width="640" height="640" loading="lazy" decoding="async" alt="Lackpolitur mit Exzenter-Poliermaschine"></div>
+            <div class="media"><img src="assets/img/leistungen/aussen-3.webp" width="640" height="640" loading="lazy" decoding="async" alt="Lack wird nach der Versiegelung mit Mikrofasertuch abgenommen"></div>
+            <div class="media"><img src="assets/img/leistungen/aussen-4.webp" width="640" height="640" loading="lazy" decoding="async" alt="Scheinwerfer eines Lexus wird mit Mikrofasertuch bearbeitet"></div>
           </div>
-
-          <ul class="services">
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/handwaesche.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Frisch gewaschener weißer BMW von hinten unter Hexagon-Beleuchtung">
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Handwäsche</h4>
-                <p class="service__note">inkl. Felgenreinigung</p>
-                <p class="service__text">Das Fahrzeug wird gründlich per Hand gewaschen, Felgen und Radkästen werden mitgereinigt.</p>
-              </div>
-              <p class="service__price"><small>ab</small>25&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/politur.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Lackpolitur mit Exzenter-Poliermaschine">
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Lackreinigung &amp; Politur</h4>
-                <p class="service__text">Entfernt oberflächliche Verschmutzungen und leichte Kratzer – der Lack erhält neuen Glanz.</p>
-              </div>
-              <p class="service__price"><small>ab</small>80&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/nanoversiegelung.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Lack wird nach der Versiegelung mit Mikrofasertuch abgenommen">
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Nanoversiegelung</h4>
-                <p class="service__text">Schutzschicht für den Lack, wasser- und schmutzabweisend, hält mehrere Monate.</p>
-              </div>
-              <p class="service__price"><small>ab</small>150&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/scheinwerfer.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Scheinwerfer eines Lexus wird mit Mikrofasertuch bearbeitet">
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Scheinwerfer&shy;aufbereitung</h4>
-                <p class="service__text">Vergilbte oder matte Scheinwerfer werden poliert – für bessere Sicht und TÜV-tauglich.</p>
-              </div>
-              <p class="service__price"><small>ab</small>50&nbsp;€</p>
-            </li>
-          </ul>
+          <div>
+            <div class="svc__head">
+              <h3 class="h-md">Außenreinigung</h3>
+              <span class="svc__meta">4 Leistungen</span>
+            </div>
+            <ul class="price-list">
+              <li class="price-item">
+                <h4 class="price-item__name">Handwäsche <span class="price-item__note">inkl. Felgenreinigung</span></h4>
+                <p class="price-item__price"><small>ab</small>25&nbsp;€</p>
+                <p class="price-item__desc">Das Fahrzeug wird gründlich per Hand gewaschen, Felgen und Radkästen werden mitgereinigt.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Lackreinigung &amp; Politur</h4>
+                <p class="price-item__price"><small>ab</small>80&nbsp;€</p>
+                <p class="price-item__desc">Entfernt oberflächliche Verschmutzungen und leichte Kratzer – der Lack erhält neuen Glanz.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Nanoversiegelung</h4>
+                <p class="price-item__price"><small>ab</small>150&nbsp;€</p>
+                <p class="price-item__desc">Schutzschicht für den Lack, wasser- und schmutzabweisend, hält mehrere Monate.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Scheinwerferaufbereitung</h4>
+                <p class="price-item__price"><small>ab</small>50&nbsp;€</p>
+                <p class="price-item__desc">Vergilbte oder matte Scheinwerfer werden poliert – für bessere Sicht und TÜV-tauglich.</p>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <!-- 02 Innenreinigung -->
-        <div class="category" id="innen">
-          <div class="category__aside">
-            <span class="category__num">02</span>
-            <h3 class="h-md">Innen&shy;reinigung</h3>
-            <p class="category__intro">5 Leistungen ab 40&nbsp;€</p>
+        <!-- Innenreinigung -->
+        <div class="svc svc--reverse" id="innen">
+          <div class="svc__media mosaic mosaic--portrait">
+            <div class="media"><img src="assets/img/leistungen/innen-1.webp" width="640" height="800" loading="lazy" decoding="async" alt="Reinigung der Innenraumverkleidung mit Applikator-Pad"></div>
+            <div class="media"><img src="assets/img/leistungen/innen-2.webp" width="640" height="800" loading="lazy" decoding="async" alt="Pflege eines hellen Ledersitzes mit Applikator-Pad"></div>
           </div>
+          <div>
+            <div class="svc__head">
+              <h3 class="h-md">Innenreinigung</h3>
+              <span class="svc__meta">5 Leistungen</span>
+            </div>
+            <ul class="price-list">
+              <li class="price-item">
+                <h4 class="price-item__name">Basis-Innenreinigung</h4>
+                <p class="price-item__price"><small>ab</small>40&nbsp;€</p>
+                <p class="price-item__desc">Saugen von Sitzen, Teppichen und Kofferraum sowie Abwischen der Oberflächen.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Intensive Innenreinigung</h4>
+                <p class="price-item__price"><small>ab</small>100&nbsp;€</p>
+                <p class="price-item__desc">Zusätzlich Tiefenreinigung von Kunststoffteilen, Einstiegsleisten und Zwischenräumen.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Polsterreinigung <span class="price-item__note">Stoff</span></h4>
+                <p class="price-item__price"><small>ab</small>50&nbsp;€</p>
+                <p class="price-item__desc">Tiefenreinigung von Sitzen und Teppichen, entfernt Flecken und Gerüche.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Lederpflege</h4>
+                <p class="price-item__price"><small>ab</small>80&nbsp;€</p>
+                <p class="price-item__desc">Reinigung und Pflege von Ledersitzen mit speziellen Produkten, verhindert Risse.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Geruchsentfernung <span class="price-item__note">z.&nbsp;B. Ozonbehandlung</span></h4>
+                <p class="price-item__price"><small>ab</small>50&nbsp;€</p>
+                <p class="price-item__desc">Neutralisiert unangenehme Gerüche wie Nikotin oder Tiergeruch.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-          <ul class="services">
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/innen-basis.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Aussaugen des Fahrzeuginnenraums">
-                <span class="media__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M3.2 10.5h6.3M14.5 10.5h6.3M12 14.5V21"/></svg></span>
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Basis-Innenreinigung</h4>
-                <p class="service__text">Saugen von Sitzen, Teppichen und Kofferraum sowie Abwischen der Oberflächen.</p>
-              </div>
-              <p class="service__price"><small>ab</small>40&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/innen-intensiv.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Reinigung der Innenraumverkleidung mit Applikator-Pad">
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Intensive Innenreinigung</h4>
-                <p class="service__text">Zusätzlich Tiefenreinigung von Kunststoffteilen, Einstiegsleisten und Zwischenräumen.</p>
-              </div>
-              <p class="service__price"><small>ab</small>100&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/polster.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Tiefenreinigung eines Stoffsitzes">
-                <span class="media__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2M19 18v2"/></svg></span>
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Polsterreinigung</h4>
-                <p class="service__note">Stoff</p>
-                <p class="service__text">Tiefenreinigung von Sitzen und Teppichen, entfernt Flecken und Gerüche.</p>
-              </div>
-              <p class="service__price"><small>ab</small>50&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/leder.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Pflege eines hellen Ledersitzes mit Applikator-Pad">
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Lederpflege</h4>
-                <p class="service__text">Reinigung und Pflege von Ledersitzen mit speziellen Produkten, verhindert Risse.</p>
-              </div>
-              <p class="service__price"><small>ab</small>80&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/geruch.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Ozonbehandlung im Fahrzeuginnenraum">
-                <span class="media__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg></span>
-              </div>
-              <div class="service__body">
-                <h4 class="service__title">Geruchsentfernung</h4>
-                <p class="service__note">z.&nbsp;B. Ozonbehandlung</p>
-                <p class="service__text">Neutralisiert unangenehme Gerüche wie Nikotin oder Tiergeruch.</p>
-              </div>
-              <p class="service__price"><small>ab</small>50&nbsp;€</p>
-            </li>
-          </ul>
+        <!-- Zusatzleistungen -->
+        <div class="svc" id="zusatz">
+          <div class="svc__media mosaic mosaic--single">
+            <div class="media"><img src="assets/img/leistungen/zusatz-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Weißer BMW M2 nach der Aufbereitung im Studio"></div>
+          </div>
+          <div>
+            <div class="svc__head">
+              <h3 class="h-md">Zusatzleistungen</h3>
+              <span class="svc__meta">3 Leistungen</span>
+            </div>
+            <ul class="price-list">
+              <li class="price-item">
+                <h4 class="price-item__name">Motorreinigung</h4>
+                <p class="price-item__price"><small>ab</small>50&nbsp;€</p>
+                <p class="price-item__desc">Schmutz und Ölreste im Motorraum werden schonend entfernt.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Felgenversiegelung</h4>
+                <p class="price-item__price"><small>ab</small>40&nbsp;€</p>
+                <p class="price-item__desc">Schutzschicht gegen Bremsstaub, leichteres Reinigen.</p>
+              </li>
+              <li class="price-item">
+                <h4 class="price-item__name">Cabrio-Verdeckpflege</h4>
+                <p class="price-item__price"><small>ab</small>60&nbsp;€</p>
+                <p class="price-item__desc">Reinigung und Imprägnierung des Verdecks, schützt vor Wasser und Schimmel.</p>
+              </li>
+            </ul>
+            <p class="price-note">Alle Preise sind Ab-Preise. Der endgültige Preis richtet sich nach Fahrzeuggröße und Zustand – gerne erstellen wir Ihnen ein individuelles Angebot.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 03 Komplettpakete -->
-    <section class="section section--raised" id="pakete">
-      <div class="container packages-wrap">
-        <div class="media">
-          <img src="assets/img/pakete.webp" width="1050" height="1400" loading="lazy" decoding="async"
-               alt="Weißer BMW M2 nach der Aufbereitung im Studio">
-        </div>
-
-        <div>
-          <span class="category__num">03</span>
-          <h2 class="h-lg">Komplett&shy;pakete</h2>
-          <p class="lead packages-lead">Innen und außen in einem Termin – abgestimmt auf die Größe Ihres Fahrzeugs.</p>
-
-          <ul class="packages">
-            <li class="package">
-              <h3 class="package__title">Kleinwagen</h3>
-              <p class="package__price"><small>ab</small>150&nbsp;€</p>
-              <div class="package__groups">
-                <div class="package__group">
-                  <h4>Außen</h4>
-                  <ul class="ticks">
-                    <li>Handwäsche</li>
-                    <li>Politur</li>
-                    <li>Felgenreinigung</li>
-                  </ul>
-                </div>
-                <div class="package__group">
-                  <h4>Innen</h4>
-                  <ul class="ticks">
-                    <li>Basisreinigung mit Saugen</li>
-                    <li>Oberflächenpflege</li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-
-            <li class="package">
-              <h3 class="package__title">Mittelklasse</h3>
-              <p class="package__price"><small>ab</small>200&nbsp;€</p>
-              <div class="package__groups">
-                <div class="package__group">
-                  <h4>Außen</h4>
-                  <ul class="ticks">
-                    <li>Handwäsche</li>
-                    <li>Politur</li>
-                    <li>Einfache Versiegelung</li>
-                    <li>Felgenreinigung</li>
-                  </ul>
-                </div>
-                <div class="package__group">
-                  <h4>Innen</h4>
-                  <ul class="ticks">
-                    <li>Intensive Innenreinigung</li>
-                    <li>inkl. Teppiche</li>
-                    <li>Kunststoffpflege</li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-
-            <li class="package">
-              <h3 class="package__title">SUV / Transporter</h3>
-              <p class="package__price"><small>ab</small>250&nbsp;€</p>
-              <div class="package__groups">
-                <div class="package__group">
-                  <h4>Außen</h4>
-                  <ul class="ticks">
-                    <li>Handwäsche</li>
-                    <li>Politur</li>
-                    <li>Versiegelung</li>
-                    <li>Felgenreinigung</li>
-                  </ul>
-                </div>
-                <div class="package__group">
-                  <h4>Innen</h4>
-                  <ul class="ticks">
-                    <li>Intensive Innenreinigung</li>
-                    <li>inkl. Polsterpflege</li>
-                    <li>Große Ladefläche / Kofferraum</li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-          </ul>
-
-          <a class="btn btn--primary" href="#kontakt">
-            Paket anfragen
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04 Zusatzleistungen -->
-    <section class="section" id="zusatz">
+    <!-- Komplettpakete -->
+    <section class="section" id="pakete">
       <div class="container">
-        <div class="category">
-          <div class="category__aside">
-            <span class="category__num">04</span>
-            <h2 class="h-md">Zusatz&shy;leistungen</h2>
-            <p class="category__intro">3 Leistungen ab 40&nbsp;€</p>
-          </div>
-
-          <ul class="services">
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/motor.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Gereinigter Motorraum">
-                <span class="media__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h3V6h5v2h2l2 2v1.5h2v4h-2V17l-2 2h-6l-2-2H5v-3H3v-3h2V8z"/><path d="M11 11.5l-1 2.5h3l-1 2.5"/></svg></span>
-              </div>
-              <div class="service__body">
-                <h3 class="service__title">Motorreinigung</h3>
-                <p class="service__text">Schmutz und Ölreste im Motorraum werden schonend entfernt.</p>
-              </div>
-              <p class="service__price"><small>ab</small>50&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/felgen.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Versiegelte Felge">
-                <span class="media__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12.0 9.5L12.0 5.0M14.4 11.2L18.7 9.8M13.5 14.0L16.1 17.7M10.5 14.0L7.9 17.7M9.6 11.2L5.3 9.8"/></svg></span>
-              </div>
-              <div class="service__body">
-                <h3 class="service__title">Felgenversiegelung</h3>
-                <p class="service__text">Schutzschicht gegen Bremsstaub, leichteres Reinigen.</p>
-              </div>
-              <p class="service__price"><small>ab</small>40&nbsp;€</p>
-            </li>
-
-            <li class="service">
-              <div class="service__media media">
-                <img src="assets/img/leistungen/cabrio.webp" width="600" height="750" loading="lazy" decoding="async"
-                     alt="Gepflegtes Cabrio-Verdeck">
-                <span class="media__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a10 10 0 0 0-20 0z"/><path d="M12 12v8a2 2 0 0 0 4 0"/><path d="M12 2v1"/></svg></span>
-              </div>
-              <div class="service__body">
-                <h3 class="service__title">Cabrio-Verdeckpflege</h3>
-                <p class="service__text">Reinigung und Imprägnierung des Verdecks, schützt vor Wasser und Schimmel.</p>
-              </div>
-              <p class="service__price"><small>ab</small>60&nbsp;€</p>
-            </li>
-          </ul>
-        </div>
-
-        <p class="price-note">Alle Preise sind Ab-Preise. Der endgültige Preis richtet sich nach Fahrzeuggröße und Zustand – gerne erstellen wir Ihnen ein individuelles Angebot.</p>
-      </div>
-    </section>
-
-    <!-- Videos: Sektion erscheint nur, wenn mindestens eine Datei vorhanden ist.
-         Weitere Videos: <figure class="video"> kopieren, Datei unter assets/videos/ ablegen (siehe DOKU.md). -->
-    <section class="section section--raised" id="videos" data-video-section hidden>
-      <div class="container video-wrap">
-        <header class="video-wrap__text">
-          <span class="label label--accent">Videos</span>
-          <h2 class="h-lg">Einblicke in unsere Arbeit</h2>
-          <p class="lead">Sehen Sie selbst, mit wie viel Sorgfalt wir Ihr Fahrzeug aufbereiten.</p>
+        <header class="section-head">
+          <span class="label">Komplettpakete</span>
+          <h2 class="h-lg">Innen und außen in einem Termin</h2>
+          <p class="lead">Abgestimmt auf die Größe Ihres Fahrzeugs.</p>
         </header>
 
-        <div class="videos">
-          <figure class="video">
-            <div class="media">
-              <video controls playsinline preload="metadata" poster="assets/videos/video-1-poster.webp"
-                     aria-label="Video: Versiegelung eines weißen Audi im Studio">
-                <source src="assets/videos/video-1.mp4" type="video/mp4">
-              </video>
+        <div class="plans">
+          <article class="plan">
+            <h3 class="plan__name">Kleinwagen</h3>
+            <p class="plan__for">Kompakte Fahrzeuge</p>
+            <p class="plan__price"><small>ab</small>150&nbsp;€</p>
+            <div class="plan__group">
+              <h4>Außen</h4>
+              <ul class="ticks">
+                  <li>Handwäsche</li>
+                  <li>Politur</li>
+                  <li>Felgenreinigung</li>
+              </ul>
             </div>
-            <figcaption>Lackversiegelung<span>Auftragen und Abnehmen der Versiegelung</span></figcaption>
-          </figure>
+            <div class="plan__group">
+              <h4>Innen</h4>
+              <ul class="ticks">
+                  <li>Basisreinigung mit Saugen</li>
+                  <li>Oberflächenpflege</li>
+              </ul>
+            </div>
+            <div class="plan__spacer"></div>
+            <a class="btn btn--outline btn--block" href="#kontakt">Termin anfragen</a>
+          </article>
+          <article class="plan">
+            <h3 class="plan__name">Mittelklasse</h3>
+            <p class="plan__for">Limousine, Kombi, Coupé</p>
+            <p class="plan__price"><small>ab</small>200&nbsp;€</p>
+            <div class="plan__group">
+              <h4>Außen</h4>
+              <ul class="ticks">
+                  <li>Handwäsche</li>
+                  <li>Politur</li>
+                  <li>Einfache Versiegelung</li>
+                  <li>Felgenreinigung</li>
+              </ul>
+            </div>
+            <div class="plan__group">
+              <h4>Innen</h4>
+              <ul class="ticks">
+                  <li>Intensive Innenreinigung</li>
+                  <li>inkl. Teppiche</li>
+                  <li>Kunststoffpflege</li>
+              </ul>
+            </div>
+            <div class="plan__spacer"></div>
+            <a class="btn btn--outline btn--block" href="#kontakt">Termin anfragen</a>
+          </article>
+          <article class="plan">
+            <h3 class="plan__name">SUV / Transporter</h3>
+            <p class="plan__for">Große Fahrzeuge</p>
+            <p class="plan__price"><small>ab</small>250&nbsp;€</p>
+            <div class="plan__group">
+              <h4>Außen</h4>
+              <ul class="ticks">
+                  <li>Handwäsche</li>
+                  <li>Politur</li>
+                  <li>Versiegelung</li>
+                  <li>Felgenreinigung</li>
+              </ul>
+            </div>
+            <div class="plan__group">
+              <h4>Innen</h4>
+              <ul class="ticks">
+                  <li>Intensive Innenreinigung</li>
+                  <li>inkl. Polsterpflege</li>
+                  <li>Große Ladefläche / Kofferraum</li>
+              </ul>
+            </div>
+            <div class="plan__spacer"></div>
+            <a class="btn btn--outline btn--block" href="#kontakt">Termin anfragen</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Kontakt — TODO: Telefon, WhatsApp, E-Mail, Adresse eintragen (siehe DOKU.md) -->
-    <section class="section" id="kontakt">
+    <!-- Kontakt — TODO: E-Mail und Adresse ergänzen, sobald bekannt (siehe DOKU.md) -->
+    <section class="section section--alt" id="kontakt">
       <div class="container contact">
         <div class="contact__media media">
           <img src="assets/img/hero.webp" width="1121" height="1403" loading="lazy" decoding="async"
                alt="Inhaber von MH Autopflege vor einem Lexus unter dem beleuchteten Firmenlogo">
         </div>
-        <div class="contact__main">
-          <span class="label label--accent">Kontakt</span>
-          <h2 class="contact__title h-lg">Jetzt Termin vereinbaren</h2>
-          <p class="lead">Rufen Sie an oder schreiben Sie uns – wir melden uns schnellstmöglich und finden einen passenden Termin für Ihr Fahrzeug.</p>
-          <a class="contact__phone" href="tel:+490000000000">+49 000 000000</a>
+        <div>
+          <span class="label">Kontakt</span>
+          <h2 class="h-lg">Jetzt Termin vereinbaren</h2>
+          <p class="lead">Rufen Sie an oder schreiben Sie uns per WhatsApp – wir melden uns schnellstmöglich und finden einen passenden Termin. Auf Wunsch holen wir Ihr Fahrzeug ab und bringen es zurück.</p>
           <div class="contact__actions">
-            <a class="btn btn--primary" href="https://wa.me/490000000000" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.95A8.5 8.5 0 1 1 7.95 19.35z"/></svg>
-              WhatsApp
-            </a>
-            <a class="btn btn--outline" href="mailto:info@example.com?subject=Terminanfrage">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>
-              E-Mail schreiben
-            </a>
+            <a class="btn btn--primary" href="tel:+4915781280442"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> 0157 81280442</a>
+            <a class="btn btn--outline" href="https://wa.me/4915781280442" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.95A8.5 8.5 0 1 1 7.95 19.35z"/></svg> WhatsApp</a>
           </div>
-
-        <dl class="contact__list">
-          <div class="contact__item">
-            <dt class="label">Telefon</dt>
-            <dd><a href="tel:+490000000000">+49 000 000000</a></dd>
-          </div>
-          <div class="contact__item">
-            <dt class="label">E-Mail</dt>
-            <dd><a href="mailto:info@example.com">info@example.com</a></dd>
-          </div>
-          <div class="contact__item">
-            <dt class="label">Adresse</dt>
-            <dd>Musterstraße 1, 00000 Musterstadt</dd>
-          </div>
-          <div class="contact__item">
-            <dt class="label">Termine</dt>
-            <dd>Nach Vereinbarung</dd>
-          </div>
-        </dl>
+          <dl class="contact__list">
+            <div class="contact__item">
+              <dt>Telefon</dt>
+              <dd><a href="tel:+4915781280442">0157 81280442</a></dd>
+            </div>
+            <div class="contact__item">
+              <dt>WhatsApp</dt>
+              <dd><a href="https://wa.me/4915781280442" target="_blank" rel="noopener noreferrer">Nachricht schreiben</a></dd>
+            </div>
+            <div class="contact__item">
+              <dt>Instagram</dt>
+              <dd><a href="https://www.instagram.com/mh_autopflege" target="_blank" rel="noopener noreferrer">@mh_autopflege</a></dd>
+            </div>
+            <div class="contact__item">
+              <dt>Service</dt>
+              <dd>Hol- &amp; Bringservice verfügbar</dd>
+            </div>
+            <div class="contact__item">
+              <dt>Termine</dt>
+              <dd>Nach Vereinbarung</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
@@ -490,21 +361,20 @@
             <span class="wordmark__name">MH Autopflege</span>
             <span class="wordmark__sub">Detailing</span>
           </a>
-          <p>Professionelle Fahrzeugaufbereitung – von der Handwäsche bis zur Langzeitversiegelung.</p>
+          <p>Professionelle Fahrzeugaufbereitung – Handwäsche, Innenreinigung, Politur und Versiegelung. Hol- &amp; Bringservice verfügbar.</p>
         </div>
         <nav class="footer-col" aria-label="Leistungen">
           <h2>Leistungen</h2>
           <a href="#aussen">Außenreinigung</a>
           <a href="#innen">Innenreinigung</a>
-          <a href="#pakete">Komplettpakete</a>
           <a href="#zusatz">Zusatzleistungen</a>
+          <a href="#pakete">Komplettpakete</a>
         </nav>
-        <!-- TODO: Kontaktdaten eintragen (siehe DOKU.md) -->
         <div class="footer-col">
           <h2>Kontakt</h2>
-          <a href="tel:+490000000000">+49 000 000000</a>
-          <a href="mailto:info@example.com">info@example.com</a>
-          <span>Musterstraße 1, 00000 Musterstadt</span>
+          <a href="tel:+4915781280442">0157 81280442</a>
+          <a href="https://wa.me/4915781280442" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="https://www.instagram.com/mh_autopflege" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> Instagram</a>
         </div>
       </div>
       <div class="site-footer__bottom">
