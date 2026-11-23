@@ -28,13 +28,14 @@ assets/
 
 **assets/css/style.css**
 - `:root`-Tokens: Farben (`--color-*`, Akzent `--color-accent`), Abstände (`--space-*`), Schriftbreite Überschriften (`--stretch-head`), Dauern.
-- Bausteine: `.btn`, `.label`, `.h-xl/.h-lg/.h-md`, `.media` (Bildrahmen mit Hex-Platzhalter bei fehlender Datei).
+- Typografie: Überschriften in Satzschreibung (`--stretch-head` 90 %), Preise/Zahlen/Wortmarke schmal (`--stretch-display` 72 %), Versalien nur für Labels, Navigation und Buttons.
+- Bausteine: `.btn`, `.label`, `.h-xl/.h-lg/.h-md`, `.media` (Bildrahmen; bei fehlender Datei Icon-Kachel `.media__icon`).
 - Sektionen: `.hero`, `.about`, `.jump`, `.category`/`.service`, `.packages-wrap`/`.package`, `.video-wrap`, `.contact`, `.legal`.
 - Breakpoints: 960 px (Navigation/Raster), 860 px (einspaltig), 560 px (Mobil).
 
 **assets/js/main.js** (läuft nach `DOMContentLoaded`, `defer`):
 - Header bekommt `is-scrolled` beim Scrollen; Mobile-Menü (`aria-expanded`, Esc schließt).
-- Fehlende Bilder → Klasse `is-missing` am Elternelement → CSS zeigt Hex-Platzhalter.
+- Fehlende Bilder → Klasse `is-missing` am Elternelement → CSS blendet das Bild aus und zeigt die Icon-Kachel.
 - Videos in `[data-video-section]`: nicht ladbare werden entfernt; Sektion + Nav-Link `[data-video-link]` erscheinen nur, wenn mind. ein Video lädt. Es läuft immer nur ein Video gleichzeitig.
 - Hero-Video: `data-src` wird erst per JS gesetzt; nicht bei `prefers-reduced-motion` oder Data-Saver. Pausiert außerhalb des Viewports.
 - Aktiver Navigationspunkt per IntersectionObserver, Jahreszahl im Footer.

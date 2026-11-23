@@ -1,4 +1,4 @@
-Bilder für die Webseite (WebP). Fehlt eine Datei, zeigt die Seite automatisch einen Platzhalter (Hex-Muster).
+Bilder für die Webseite (WebP). Fehlt eine Datei, zeigt die Seite automatisch eine Icon-Kachel.
 Umwandeln/Zuschneiden: siehe DOKU.md, Abschnitt "Bilder".
 
 hero.webp        Startbild (Hochformat 4:5, ca. 1120x1400) – auch im Kontaktbereich

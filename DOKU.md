@@ -16,10 +16,10 @@ Keine Env-Variablen, keine Secrets. Alles steht im Markup bzw. in den CSS-Tokens
 
 | Was | Wo |
 |---|---|
-| Telefonnummer (`tel:+490000000000`, Anzeige `+49 000 000000`) | `index.html`, Abschnitt `#kontakt` (3 Stellen) |
+| Telefonnummer (`tel:+490000000000`, Anzeige `+49 000 000000`) | `index.html`, Abschnitt `#kontakt` (3 Stellen) und Footer |
 | WhatsApp (`https://wa.me/490000000000`) | `index.html`, `#kontakt` |
-| E-Mail (`info@example.com`) | `index.html`, `#kontakt` (2 Stellen) |
-| Adresse (`Musterstraße 1, 00000 Musterstadt`) | `index.html`, `#kontakt` |
+| E-Mail (`info@example.com`) | `index.html`, `#kontakt` (2 Stellen) und Footer |
+| Adresse (`Musterstraße 1, 00000 Musterstadt`) | `index.html`, `#kontakt` und Footer |
 | Alle markierten Angaben (`<span class="todo">`) | `impressum.html`, `datenschutz.html` – danach rechtlich prüfen lassen |
 
 **Design anpassen:** Farben/Abstände in `assets/css/style.css` unter `:root`. Akzentfarbe = `--color-accent` (aktuell Studio-Blau `#6b84ff`, 6:1 Kontrast auf Schwarz – bei Änderung mind. 4.5:1 einhalten).
@@ -44,7 +44,7 @@ Eigene Domain (optional): in Settings → Pages eintragen, beim DNS-Anbieter `CN
 
 ### Bilder
 
-Format WebP, Hochformat 4:5. Dateinamen und Status: `assets/img/README.txt`. Fehlt eine Datei, erscheint automatisch ein Hex-Platzhalter – kein Code-Eingriff nötig.
+Format WebP, Hochformat 4:5. Dateinamen und Status: `assets/img/README.txt`. Fehlt eine Datei, erscheint automatisch eine Icon-Kachel (`<span class="media__icon">` im jeweiligen `.media`) – sobald das Foto da ist, wird es statt der Kachel angezeigt, kein Code-Eingriff nötig.
 
 ```bash
 ffmpeg -i foto.jpg -vf "scale=600:750:force_original_aspect_ratio=increase,crop=600:750" -c:v libwebp -quality 78 -map_metadata -1 assets/img/leistungen/polster.webp
@@ -90,7 +90,7 @@ Weiteres Video einbinden: in `index.html` im Block `#videos` die `<figure class=
 
 | Problem | Ursache → Lösung |
 |---|---|
-| Bild zeigt Hex-Muster | Datei fehlt oder Name falsch → mit `assets/img/README.txt` abgleichen (Groß-/Kleinschreibung beachten). |
+| Statt Foto erscheint Icon-Kachel | Datei fehlt oder Name falsch → mit `assets/img/README.txt` abgleichen (Groß-/Kleinschreibung beachten). |
 | Video-Sektion fehlt | Keines der Videos ladbar → Pfad/Format prüfen (H.264-MP4, siehe oben). |
 | Video läuft in Chrome/Firefox nicht, in Safari schon | HEVC-Datei → mit `ffmpeg` nach H.264 umwandeln. |
 | Hero-Video startet nicht | Gewollt bei „Bewegung reduzieren“ (Betriebssystem) oder Datensparmodus – dann bleibt das Hero-Bild. |
