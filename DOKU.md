@@ -81,15 +81,18 @@ ffmpeg -i foto.jpg -vf "scale=720:900:force_original_aspect_ratio=increase,crop=
 
 ### Reels (Instagram-Links)
 
-In der Galerie gibt es eine Reihe „Reels“: Kacheln mit Vorschaubild und Play-Symbol, die direkt auf das jeweilige Instagram-Reel verlinken (auf dem Handy öffnet sich die Instagram-App). Es wird nichts von Instagram eingebettet – keine Meta-Skripte, kein Cookie-Banner nötig.
+In der Galerie gibt es eine Reihe „Reels“: Kacheln, die direkt auf den jeweiligen Instagram-Beitrag verlinken (auf dem Handy öffnet sich die Instagram-App). Es wird nichts von Instagram eingebettet – keine Meta-Skripte, kein Cookie-Banner nötig. Aktuell verlinkt: BMW M4, GLC 63 S AMG, BMW M2, Piaggio, SQ5 sowie „Alle Reels“.
 
-Neues Reel hinzufügen:
-1. Link holen: in Instagram beim Reel auf „Teilen“ → „Link kopieren“ (z. B. `https://www.instagram.com/reel/ABC123/`).
-2. Vorschaubild 9:16 als `assets/img/reels/reel-N.webp` ablegen (540×960), z. B. aus dem Video:
+Ohne Vorschaubild zeigt die Kachel den Modellnamen auf dem Hex-Muster (`reel--text`). Neues Reel:
+1. Link holen: in Instagram beim Beitrag auf „Teilen“ → „Link kopieren“.
+2. In `index.html` im Block `.reels` ein `<li>` kopieren, `href`, `aria-label` und Namen anpassen. „Alle Reels“ bleibt die letzte Kachel.
+3. Optional Vorschaubild 9:16 (540×960) aus Video oder Screenshot erzeugen, als erstes Element im `<a>` einfügen und `reel--text` entfernen:
    ```bash
-   ffmpeg -ss 3 -i video.mp4 -frames:v 1 -vf "scale=540:960:force_original_aspect_ratio=increase,crop=540:960" -c:v libwebp -quality 76 -map_metadata -1 assets/img/reels/reel-2.webp
+   ffmpeg -i screenshot.jpg -vf "scale=540:960:force_original_aspect_ratio=increase,crop=540:960" -c:v libwebp -quality 76 -map_metadata -1 assets/img/reels/bmw-m4.webp
    ```
-3. In `index.html` im Block `.reels` ein `<li>` kopieren, `href`, Bildpfad und Titel anpassen. Die letzte Kachel „Alle Reels“ bleibt am Ende.
+   ```html
+   <img src="assets/img/reels/bmw-m4.webp" width="540" height="960" loading="lazy" decoding="async" alt="">
+   ```
 
 ### Logo
 

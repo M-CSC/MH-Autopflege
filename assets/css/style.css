@@ -768,9 +768,45 @@ a, button { cursor: pointer; touch-action: manipulation; }
   transition: transform var(--dur) var(--ease-out);
 }
 .reel__arrow svg { width: 18px; height: 18px; transform: rotate(-45deg); }
+/* Kachel ohne Vorschaubild: Modellname auf Hex-Muster */
+.reel--text {
+  border: 1px solid var(--color-line);
+  background:
+    radial-gradient(90% 55% at 50% 38%, rgba(111, 135, 255, 0.18), transparent 70%),
+    url("../img/brand/hex.svg") 30% 30% / 220% auto no-repeat,
+    linear-gradient(180deg, #15151a, #0b0b0d);
+}
+.reels li:nth-child(2) .reel--text { background-position: 0 0, 80% 10%, 0 0; }
+.reels li:nth-child(3) .reel--text { background-position: 0 0, 10% 70%, 0 0; }
+.reels li:nth-child(4) .reel--text { background-position: 0 0, 90% 60%, 0 0; }
+.reels li:nth-child(5) .reel--text { background-position: 0 0, 50% 0%, 0 0; }
+.reel--text::after { background: linear-gradient(0deg, rgba(7, 7, 8, 0.92) 0%, rgba(7, 7, 8, 0.55) 55%, rgba(7, 7, 8, 0.35) 100%); }
+.reel__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.reel__kicker svg { width: 14px; height: 14px; }
+.reel__name {
+  display: block;
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  font-weight: 800;
+  font-stretch: var(--stretch-display);
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+.reel--text .reel__play { top: 42%; }
+
 @media (hover: hover) {
   .reel:hover > img:first-child { transform: scale(1.05); }
   .reel:hover .reel__play { background: var(--color-btn); border-color: var(--color-btn); color: var(--color-btn-text); }
+  .reel--text:hover { border-color: var(--color-line-strong); }
   .reel--all:hover { border-color: var(--color-text); }
 }
 
