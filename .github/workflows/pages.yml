@@ -29,6 +29,9 @@ jobs:
           mkdir _site
           cp -r index.html impressum.html datenschutz.html robots.txt assets _site/
           find _site -name 'README.txt' -delete
+          # Cache-Busting: ?v=dev in den HTML-Dateien durch den Commit-Hash ersetzen,
+          # damit Browser nach jedem Deploy das aktuelle CSS/JS laden
+          sed -i "s/?v=dev/?v=${GITHUB_SHA::8}/g" _site/*.html
           touch _site/.nojekyll
 
       - name: Pages konfigurieren

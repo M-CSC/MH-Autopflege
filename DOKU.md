@@ -83,6 +83,10 @@ ffmpeg -i foto.jpg -vf "scale=720:900:force_original_aspect_ratio=increase,crop=
 
 `assets/img/brand/logo.webp` (mit Icons) und `logo-schrift.webp` (nur Schriftzug) sind aus dem Foto des Leuchtschilds freigestellt (transparenter Hintergrund). Liegt eine Original-Logodatei vor (SVG/PNG), diese Dateien damit ersetzen.
 
+## Cache
+
+GitHub Pages lässt Dateien ca. 10 Minuten im Browser-Cache. Damit nach einem Deploy nie neues HTML mit altem CSS/JS kombiniert wird, binden die HTML-Dateien `style.css?v=dev` und `main.js?v=dev` ein; der Workflow ersetzt `dev` beim Deploy durch den Commit-Hash. Neue HTML-Seiten müssen CSS/JS ebenfalls mit `?v=dev` einbinden.
+
 ## Betrieb & Wartung
 
 - Keine Laufzeit-Abhängigkeiten, keine Updates nötig. Schrift (Archivo, OFL) liegt lokal.
