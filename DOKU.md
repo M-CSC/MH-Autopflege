@@ -79,6 +79,18 @@ Bilder `assets/img/galerie/01.webp` … (4:5, 720×900). Neues Bild: Datei ableg
 ffmpeg -i foto.jpg -vf "scale=720:900:force_original_aspect_ratio=increase,crop=720:900" -c:v libwebp -quality 78 -map_metadata -1 assets/img/galerie/10.webp
 ```
 
+### Reels (Instagram-Links)
+
+In der Galerie gibt es eine Reihe „Reels“: Kacheln mit Vorschaubild und Play-Symbol, die direkt auf das jeweilige Instagram-Reel verlinken (auf dem Handy öffnet sich die Instagram-App). Es wird nichts von Instagram eingebettet – keine Meta-Skripte, kein Cookie-Banner nötig.
+
+Neues Reel hinzufügen:
+1. Link holen: in Instagram beim Reel auf „Teilen“ → „Link kopieren“ (z. B. `https://www.instagram.com/reel/ABC123/`).
+2. Vorschaubild 9:16 als `assets/img/reels/reel-N.webp` ablegen (540×960), z. B. aus dem Video:
+   ```bash
+   ffmpeg -ss 3 -i video.mp4 -frames:v 1 -vf "scale=540:960:force_original_aspect_ratio=increase,crop=540:960" -c:v libwebp -quality 76 -map_metadata -1 assets/img/reels/reel-2.webp
+   ```
+3. In `index.html` im Block `.reels` ein `<li>` kopieren, `href`, Bildpfad und Titel anpassen. Die letzte Kachel „Alle Reels“ bleibt am Ende.
+
 ### Logo
 
 `assets/img/brand/logo.webp` (mit Icons) und `logo-schrift.webp` (nur Schriftzug) sind aus dem Foto des Leuchtschilds freigestellt (transparenter Hintergrund). Liegt eine Original-Logodatei vor (SVG/PNG), diese Dateien damit ersetzen.

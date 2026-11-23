@@ -19,7 +19,7 @@ assets/
   js/main.js               Interaktionen (Navigation, Tabs, Galerie, Hero-Video, Handy-Leiste)
   fonts/                   Archivo Variable (wght + wdth), lokal, inkl. OFL-Lizenz
   img/brand/               logo.webp, logo-schrift.webp (aus Foto freigestellt), hex.svg (Leuchtraster)
-  img/                     about.webp, hero.webp, favicon.svg, leistungen/*.webp, galerie/01–09.webp
+  img/                     about.webp, favicon.svg, leistungen/*.webp, galerie/01–09.webp, reels/*.webp
   videos/                  hero.mp4 (Desktop), hero-mobile.mp4 (Handy), hero-poster.webp
 .github/workflows/pages.yml  Build & Deploy nach GitHub Pages
 ```
@@ -32,7 +32,7 @@ assets/
 - `:root`-Tokens: Farben (`--color-*`, Akzent `--color-accent` = LED-Blau), Abstände (`--space-*`, `--section-y`), `--stretch-display` (68 % für Display-Versalien).
 - Typografie: `.display` (schmal, Versalien) für H1/H2, Fließtext normal. `.idx` = Abschnittsindex „01 Über uns“.
 - Bausteine: `.btn`, `.media` (Bildrahmen mit Fallback), `.head` (zweispaltiger Abschnittskopf).
-- Sektionen: `.hero`/`.hero__big`, `.marquee`, `.about`, `.tabs`/`.panel`/`.mosaic`/`.price-list`, `.pkgs`/`.pkg`, `.gallery`, `.contact-section` (Hex-Raster als `::before`), `.mobilebar`, `.legal`.
+- Sektionen: `.hero`/`.hero__big`, `.marquee`, `.about`, `.tabs`/`.panel`/`.mosaic`/`.price-list`, `.pkgs`/`.pkg`, `.gallery`, `.reels`/`.reel` (Instagram-Links), `.contact-section` (Hex-Raster als `::before`), `.mobilebar`, `.legal`.
 - Anker-Offset: `.section[id]` hat negatives `scroll-margin-top`, damit die Überschrift direkt unter dem fixen Header landet.
 - Breakpoints: 1000 px (Navigation), 900 px (einspaltig), 760 px (Handy-Leiste), 560 px (Handy).
 
