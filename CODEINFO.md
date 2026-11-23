@@ -9,40 +9,43 @@ Statische Webseite ohne Build-Schritt und ohne Abhängigkeiten: drei HTML-Seiten
 ## Verzeichnislayout
 
 ```
-index.html                 Startseite (One-Page: Hero mit Hintergrundvideo, Über uns, Leistungen, Pakete, Kontakt)
+index.html                 Startseite (One-Page): Hero mit Hintergrundvideo, Laufband, Über uns,
+                           Leistungen (Tabs), Komplettpakete, Galerie, Kontakt, Handy-Aktionsleiste
 impressum.html             Impressum (Entwurf mit Platzhaltern)
 datenschutz.html           Datenschutzerklärung (Entwurf mit Platzhaltern)
 robots.txt
 assets/
   css/style.css            Komplettes Styling inkl. Design-Tokens und Breakpoints
-  js/main.js               Interaktionen (Navigation, Medien-Fallbacks, Hero-Video)
+  js/main.js               Interaktionen (Navigation, Tabs, Galerie, Hero-Video, Handy-Leiste)
   fonts/                   Archivo Variable (wght + wdth), lokal, inkl. OFL-Lizenz
-  img/                     about.webp, hero.webp (Kontaktbild), leistungen/*.webp, favicon.svg, README.txt
-  videos/                  hero.mp4 (Hintergrund, stumm) + hero-poster.webp, README.txt
+  img/brand/               logo.webp, logo-schrift.webp (aus Foto freigestellt), hex.svg (Leuchtraster)
+  img/                     about.webp, hero.webp, favicon.svg, leistungen/*.webp, galerie/01–09.webp
+  videos/                  hero.mp4 (Desktop), hero-mobile.mp4 (Handy), hero-poster.webp
 .github/workflows/pages.yml  Build & Deploy nach GitHub Pages
 ```
 
 ## Module & Zuständigkeiten
 
-**index.html** – Inhalte und Preise stehen direkt im Markup. Sektionen per `id` adressierbar: `#top` (Hero), `#ueber`, `#leistungen` (`#aussen`, `#innen`, `#zusatz`), `#pakete`, `#kontakt`. Jeder Leistungsbereich ist ein `.svc`-Block (Bildmosaik | Preisliste `li.price-item`), Pakete sind `article.plan`.
+**index.html** – Inhalte und Preise stehen direkt im Markup. Sektionen: `#top` (Hero), `#ueber`, `#leistungen` mit Tab-Panels `#aussen`, `#innen`, `#zusatz`, `#pakete`, `#galerie`, `#kontakt`. Icons als SVG-`<symbol>` am Seitenanfang, eingebunden per `<use href="#i-…">`.
 
 **assets/css/style.css**
-- `:root`-Tokens: Farben (`--color-*`, Akzent `--color-accent`), Abstände (`--space-*`), Schriftbreite Überschriften (`--stretch-head`), Dauern.
-- Typografie: Überschriften in Satzschreibung (`--stretch-head` 92 %), Zahlen/Wortmarke schmaler (`--stretch-num` 78 %), Versalien nur für Labels.
-- Bausteine: `.btn`, `.label`, `.h-lg/.h-md`, `.section-head` (Label + Titel + Lead), `.media` (Bildrahmen mit neutralem Fallback bei fehlender Datei).
-- Sektionen: `.hero` (Vollbild-Video + `.hero__bar`), `.about`, `.tabs`, `.svc`/`.mosaic`/`.price-list`, `.plans`/`.plan`, `.contact`, `.legal`.
-- Breakpoints: 960 px (Navigation, Leistungsblöcke einspaltig), 860 px (Hero/Über uns/Kontakt), 560 px (Mobil).
+- `:root`-Tokens: Farben (`--color-*`, Akzent `--color-accent` = LED-Blau), Abstände (`--space-*`, `--section-y`), `--stretch-display` (68 % für Display-Versalien).
+- Typografie: `.display` (schmal, Versalien) für H1/H2, Fließtext normal. `.idx` = Abschnittsindex „01 Über uns“.
+- Bausteine: `.btn`, `.media` (Bildrahmen mit Fallback), `.head` (zweispaltiger Abschnittskopf).
+- Sektionen: `.hero`/`.hero__big`, `.marquee`, `.about`, `.tabs`/`.panel`/`.mosaic`/`.price-list`, `.pkgs`/`.pkg`, `.gallery`, `.contact-section` (Hex-Raster als `::before`), `.mobilebar`, `.legal`.
+- Anker-Offset: `.section[id]` hat negatives `scroll-margin-top`, damit die Überschrift direkt unter dem fixen Header landet.
+- Breakpoints: 1000 px (Navigation), 900 px (einspaltig), 760 px (Handy-Leiste), 560 px (Handy).
 
 **assets/js/main.js** (läuft nach `DOMContentLoaded`, `defer`):
-- Header bekommt `is-scrolled` beim Scrollen; Mobile-Menü (`aria-expanded`, Esc schließt).
-- Fehlende Bilder → Klasse `is-missing` am Elternelement → CSS blendet das Bild aus.
-- Optionale Video-Sektion `[data-video-section]` (derzeit nicht im Markup): erscheint nur, wenn mind. ein Video lädt.
-- Hero-Video: `data-src` wird erst per JS gesetzt; nicht bei `prefers-reduced-motion` oder Data-Saver. Pausiert außerhalb des Viewports.
-- Aktiver Navigationspunkt per IntersectionObserver, Jahreszahl im Footer.
+- Header-Hintergrund beim Scrollen, Mobile-Menü (`aria-expanded`, Esc).
+- Bild-Fallback nur bei echtem Ladefehler (`is-missing`).
+- Hero-Video: wählt `data-src-mobile` bis 760 px, sonst `data-src`; nicht bei `prefers-reduced-motion`/Datensparmodus; pausiert außerhalb des Viewports.
+- Tabs (ARIA-Tabs mit Pfeiltasten); ohne JS bleiben alle Panels sichtbar. Links auf `#aussen/#innen/#zusatz` öffnen den passenden Tab.
+- Galerie-Pfeile (scrollen um 80 % der Breite), Handy-Aktionsleiste (sichtbar nach dem Hero, ausgeblendet im Kontaktbereich), aktiver Nav-Punkt, Jahreszahl.
 
 ## Zusammenspiel / Datenfluss
 
-Kein Build: Browser lädt HTML → `style.css` + `main.js` (defer) → Bilder lazy, Hero-Bild sofort, Hero-Video nachgelagert. Der Pages-Workflow kopiert nur die auslieferbaren Dateien (`index.html`, `impressum.html`, `datenschutz.html`, `robots.txt`, `assets/` ohne `README.txt`) nach `_site` und deployt dieses Artefakt.
+Kein Build: Browser lädt HTML → `style.css` + `main.js` (defer) → Bilder lazy, Hero-Standbild sofort, Hero-Video nachgelagert. Der Pages-Workflow kopiert nur die auslieferbaren Dateien (`index.html`, `impressum.html`, `datenschutz.html`, `robots.txt`, `assets/` ohne `README.txt`) nach `_site` und deployt dieses Artefakt.
 
 ## Wichtige Einstiegspunkte
 

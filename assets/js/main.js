@@ -2,6 +2,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+  const isSmall = window.matchMedia("(max-width: 760px)").matches;
+  const scrollBehavior = reduceMotion ? "auto" : "smooth";
 
   /* ---------- Header: Hintergrund ab Scrollbeginn ---------- */
   const header = document.querySelector(".site-header");
@@ -30,49 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---------- Fehlende Bilder: Platzhalter statt kaputtem Bild ---------- */
-  // Nur echte Ladefehler werten. Lazy-Bilder nicht über img.complete prüfen:
-  // Safari meldet complete=true, solange ein Lazy-Bild noch gar nicht geladen wurde.
+  /* ---------- Fehlende Bilder ----------
+     Nur echte Ladefehler werten. Lazy-Bilder nicht über img.complete prüfen:
+     Safari meldet complete=true, solange ein Lazy-Bild noch nicht geladen wurde. */
   document.querySelectorAll(".media img, .hero__media img").forEach((img) => {
     const markMissing = () => img.parentElement.classList.add("is-missing");
     img.addEventListener("error", markMissing, { once: true });
     if (img.loading !== "lazy" && img.complete && img.currentSrc && img.naturalWidth === 0) markMissing();
   });
 
-  /* ---------- Videos: fehlende ausblenden, Sektion nur zeigen, wenn mind. eins da ist ---------- */
-  const videoSection = document.querySelector("[data-video-section]");
-  if (videoSection) {
-    const items = [...videoSection.querySelectorAll(".video")];
-    let pending = items.length;
-    let available = 0;
-    const settle = (ok, item) => {
-      if (ok) available += 1;
-      else item.remove();
-      pending -= 1;
-      if (pending === 0 && available > 0) {
-        videoSection.hidden = false;
-        document.querySelectorAll("[data-video-link]").forEach((el) => { el.hidden = false; });
-      }
-    };
-    items.forEach((item) => {
-      const video = item.querySelector("video");
-      const sources = video.querySelectorAll("source");
-      let done = false;
-      const once = (ok) => { if (!done) { done = true; settle(ok, item); } };
-      video.addEventListener("loadedmetadata", () => once(true), { once: true });
-      video.addEventListener("error", () => once(false), { once: true });
-      if (sources.length) sources[sources.length - 1].addEventListener("error", () => once(false), { once: true });
-      if (video.readyState >= 1) once(true);
-      video.addEventListener("play", () => {
-        videoSection.querySelectorAll("video").forEach((v) => { if (v !== video) v.pause(); });
-      });
-    });
-  }
-
-  /* ---------- Hero-Video (optional, liegt über dem Hero-Bild) ---------- */
+  /* ---------- Hero-Hintergrundvideo (Handy: kleinere Datei) ---------- */
   const heroVideo = document.querySelector("[data-hero-video]");
   if (heroVideo) {
-    if (reduceMotion || saveData || !heroVideo.dataset.src) {
+    const src = (isSmall && heroVideo.dataset.srcMobile) || heroVideo.dataset.src;
+    if (reduceMotion || saveData || !src) {
       heroVideo.remove();
     } else {
       heroVideo.addEventListener("canplay", () => {
@@ -80,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroVideo.play().catch(() => {});
       }, { once: true });
       heroVideo.addEventListener("error", () => heroVideo.remove(), { once: true });
-      heroVideo.src = heroVideo.dataset.src;
+      heroVideo.src = src;
       heroVideo.load();
       if ("IntersectionObserver" in window) {
         new IntersectionObserver(([entry]) => {
@@ -90,6 +63,83 @@ document.addEventListener("DOMContentLoaded", () => {
         }).observe(heroVideo);
       }
     }
+  }
+
+  /* ---------- Leistungen: Tabs ----------
+     Ohne JS bleiben alle Bereiche sichtbar; mit JS ist immer einer aktiv. */
+  const tablist = document.querySelector('[role="tablist"]');
+  const tabs = tablist ? [...tablist.querySelectorAll('[role="tab"]')] : [];
+  const panels = tabs.map((t) => document.getElementById(t.getAttribute("aria-controls")));
+  const selectTab = (index, focus) => {
+    tabs.forEach((tab, i) => {
+      const active = i === index;
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+      panels[i].hidden = !active;
+    });
+    if (focus) tabs[index].focus();
+  };
+  if (tabs.length) {
+    tablist.closest(".section").classList.add("js-tabs");
+    tablist.hidden = false;
+    selectTab(0, false);
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => selectTab(i, false));
+      tab.addEventListener("keydown", (e) => {
+        const keys = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+        if (!(e.key in keys)) return;
+        e.preventDefault();
+        selectTab((keys[e.key] + tabs.length) % tabs.length, true);
+      });
+    });
+    // Links auf #aussen / #innen / #zusatz (z. B. im Footer) öffnen den passenden Tab
+    const openFromHash = (hash, smooth) => {
+      const i = panels.findIndex((p) => "#" + p.id === hash);
+      if (i < 0) return false;
+      selectTab(i, false);
+      tablist.scrollIntoView({ behavior: smooth ? scrollBehavior : "auto", block: "start" });
+      return true;
+    };
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        if (openFromHash(a.getAttribute("href"), true)) {
+          e.preventDefault();
+          history.replaceState(null, "", a.getAttribute("href"));
+        }
+      });
+    });
+    if (location.hash) openFromHash(location.hash, false);
+  }
+
+  /* ---------- Galerie: Pfeile (Desktop), Wischen (Handy) ---------- */
+  const gallery = document.querySelector(".gallery");
+  const galBtns = [...document.querySelectorAll("[data-gal]")];
+  if (gallery && galBtns.length) {
+    const update = () => {
+      const max = gallery.scrollWidth - gallery.clientWidth - 2;
+      galBtns.forEach((b) => {
+        b.hidden = max <= 0;
+        b.disabled = b.dataset.gal === "-1" ? gallery.scrollLeft <= 2 : gallery.scrollLeft >= max;
+      });
+    };
+    galBtns.forEach((b) => b.addEventListener("click", () => {
+      gallery.scrollBy({ left: Number(b.dataset.gal) * gallery.clientWidth * 0.8, behavior: scrollBehavior });
+    }));
+    gallery.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
+
+  /* ---------- Handy-Aktionsleiste: nach dem Hero einblenden, im Kontaktbereich ausblenden ---------- */
+  const bar = document.querySelector("[data-mobilebar]");
+  const hero = document.querySelector(".hero");
+  const contact = document.getElementById("kontakt");
+  if (bar && hero && "IntersectionObserver" in window) {
+    let pastHero = false;
+    let atContact = false;
+    const render = () => bar.classList.toggle("is-visible", pastHero && !atContact);
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; render(); }, { rootMargin: "-30% 0px 0px 0px" }).observe(hero);
+    if (contact) new IntersectionObserver(([e]) => { atContact = e.isIntersecting; render(); }, { threshold: 0.25 }).observe(contact);
   }
 
   /* ---------- Aktiver Navigationspunkt ---------- */

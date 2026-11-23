@@ -12,14 +12,14 @@ Admin- und Wartungsdoku.
 
 Keine Env-Variablen, keine Secrets. Alles steht im Markup bzw. in den CSS-Tokens.
 
-**Kontaktdaten** (in `index.html` Hero-Infoleiste, `#kontakt` und Footer; außerdem Impressum/Datenschutz):
+**Kontaktdaten** (in `index.html`: `#kontakt`, Footer, Handy-Aktionsleiste `.mobilebar`; außerdem Impressum/Datenschutz). WhatsApp-Links öffnen mit vorausgefülltem Text (`?text=…`).
 
 | Was | Wert / Status |
 |---|---|
 | Telefon | `0157 81280442` (`tel:+4915781280442`) |
 | WhatsApp | `https://wa.me/4915781280442` |
 | Instagram | `https://www.instagram.com/mh_autopflege` |
-| E-Mail | **fehlt** – bei Bedarf im Kontaktbereich eine weitere `<div class="contact__item">` ergänzen |
+| E-Mail | **fehlt** – bei Bedarf im Kontaktbereich (`.contact__facts`) und Footer ergänzen |
 | Adresse | **fehlt** – Pflicht im Impressum, optional im Kontaktbereich |
 | Impressum/Datenschutz | markierte Angaben (`<span class="todo">`) ersetzen und rechtlich prüfen lassen |
 
@@ -51,21 +51,37 @@ Format WebP. Dateinamen und Formate: `assets/img/README.txt`. Fehlt eine Datei, 
 ffmpeg -i foto.jpg -vf "scale=640:640:force_original_aspect_ratio=increase,crop=640:640" -c:v libwebp -quality 78 -map_metadata -1 assets/img/leistungen/aussen-1.webp
 ```
 
-`-map_metadata -1` entfernt EXIF-Daten (u. a. GPS-Position aus Handyfotos). Formate: Außen quadratisch 640×640, Innen 640×800, Zusatz 800×1000, `about.webp` 1040×1300, `hero.webp` (Kontaktbild) 1120×1400.
+`-map_metadata -1` entfernt EXIF-Daten (u. a. GPS-Position aus Handyfotos). Formate: Außen quadratisch 640×640, Innen 640×800, Zusatz 800×1000, `about.webp` 1040×1300.
 
 ### Video (Hero-Hintergrund)
 
-Das Video läuft stumm und in Dauerschleife vollflächig hinter dem Startbereich (`assets/videos/hero.mp4`, Standbild `hero-poster.webp`). Bei „Bewegung reduzieren“ oder Datensparmodus bleibt das Standbild stehen. iPhone-Videos (`.MOV`, HEVC) laufen nicht in allen Browsern → nach H.264-MP4 umwandeln:
+Das Video läuft stumm und in Dauerschleife vollflächig hinter dem Startbereich. Bis 760 px Breite lädt die kleinere Datei `hero-mobile.mp4` (Handy, wichtig für Besucher aus Instagram), sonst `hero.mp4`. Bei „Bewegung reduzieren“ oder Datensparmodus bleibt das Standbild `hero-poster.webp`. iPhone-Videos (`.MOV`, HEVC) laufen nicht in allen Browsern → nach H.264-MP4 umwandeln:
 
 ```bash
 ffmpeg -i IMG_XXXX.MOV -an -vf "scale=1080:1920:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 28 -r 30 -movflags +faststart -map_metadata -1 assets/videos/hero.mp4
 ```
 
 ```bash
+ffmpeg -i IMG_XXXX.MOV -an -vf "scale=540:960:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v main -preset slow -crf 29 -r 30 -movflags +faststart -map_metadata -1 assets/videos/hero-mobile.mp4
+```
+
+```bash
 ffmpeg -ss 0.8 -i IMG_XXXX.MOV -frames:v 1 -vf "scale=1080:1920:flags=lanczos" -c:v libwebp -quality 72 -map_metadata -1 assets/videos/hero-poster.webp
 ```
 
-Ziel: < 5 MB, 10–20 Sekunden, ruhige Bewegung. Durch das Overlay wird das Video stark abgedunkelt.
+Ziel: Desktop < 5 MB, Handy ≈ 1 MB, 10–20 Sekunden.
+
+### Galerie
+
+Bilder `assets/img/galerie/01.webp` … (4:5, 720×900). Neues Bild: Datei ablegen und in `index.html` im Block `.gallery` eine weitere `<div class="media"><img …></div>` mit Alt-Text ergänzen.
+
+```bash
+ffmpeg -i foto.jpg -vf "scale=720:900:force_original_aspect_ratio=increase,crop=720:900" -c:v libwebp -quality 78 -map_metadata -1 assets/img/galerie/10.webp
+```
+
+### Logo
+
+`assets/img/brand/logo.webp` (mit Icons) und `logo-schrift.webp` (nur Schriftzug) sind aus dem Foto des Leuchtschilds freigestellt (transparenter Hintergrund). Liegt eine Original-Logodatei vor (SVG/PNG), diese Dateien damit ersetzen.
 
 ## Betrieb & Wartung
 
@@ -76,7 +92,7 @@ Ziel: < 5 MB, 10–20 Sekunden, ruhige Bewegung. Durch das Overlay wird das Vide
 
 - E-Mail und Adresse ergänzen (siehe Tabelle oben).
 - Impressum und Datenschutz vervollständigen und rechtlich prüfen lassen.
-- Logo als Datei (SVG oder PNG mit transparentem Hintergrund) – aktuell Text-Wortmarke im Header.
+- Original-Logodatei (SVG/PNG) – aktuell aus Foto freigestellt.
 - Weitere Fotos (z. B. Innenraum, Motorraum, Felgen) können die Bildblöcke der Leistungen ergänzen/ersetzen.
 - Domain festlegen.
 

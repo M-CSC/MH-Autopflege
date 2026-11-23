@@ -1,10 +1,11 @@
 Bilder für die Webseite (WebP, EXIF entfernt). Fehlt eine Datei, bleibt der Bildrahmen neutral dunkel.
-Umwandeln/Zuschneiden: siehe DOKU.md, Abschnitt "Bilder".
+Umwandeln/Zuschneiden: siehe DOKU.md.
 
-about.webp            "Über uns" (4:5, 1040x1300)
-hero.webp             Kontaktbereich – Foto mit Leuchtlogo (4:5, 1121x1403)
-
-leistungen/
-  aussen-1..4.webp    Außenreinigung, 2x2-Raster (quadratisch, 640x640)
-  innen-1..2.webp     Innenreinigung (4:5, 640x800)
-  zusatz-1.webp       Zusatzleistungen (4:5, 800x1000)
+brand/logo.webp          Logo mit Icons (aus Foto freigestellt, transparent)
+brand/logo-schrift.webp  Nur Schriftzug (Header, Footer)
+brand/hex.svg            Leuchtendes Hex-Raster (Kontaktbereich)
+about.webp               "Über uns" (4:5, 1040x1300)
+leistungen/aussen-1..4   Außenreinigung (640x640)
+leistungen/innen-1..2    Innenreinigung (640x800)
+leistungen/zusatz-1      Zusatzleistungen (800x1000)
+galerie/01..09           Galerie (4:5, 720x900)
