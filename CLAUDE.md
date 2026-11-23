@@ -10,7 +10,8 @@ Statische One-Page-Webseite (HTML/CSS/JS, kein Build) für MH Autopflege. Deploy
 ## Konventionen (verbindlich)
 
 - **Footer-Credit auf jeder Seite:** `Built by <a href="https://m-csc.de" target="_blank" rel="noopener noreferrer">M-CSC</a>` im Footer (`.site-footer__bottom`, Klasse `built-by`). Neue Seiten bekommen ihn ebenfalls.
-- **CSP `'self'`** (Meta-Tag in allen HTML-Dateien): keine Inline-Styles/-Scripts, keine externen Ressourcen (Fonts, Embeds, Analytics). Externe Dienste nur als normale Links.
+- **CSP `'self'`** (Meta-Tag in allen HTML-Dateien): keine Inline-Styles/-Scripts, keine externen Ressourcen (Fonts, Embeds, Analytics). Externe Dienste nur als normale Links. Einzige Ausnahme: `form-action https://formsubmit.co` für das Anfrageformular.
+- **Formulare** laufen wie bei Hage Bedachungen über FormSubmit (`action="https://formsubmit.co/<E-Mail>"`, Hidden-Felder `_subject`, `_captcha=false`, `_template=table`, `_next` → `danke.html`, Honeypot `_honey`, Datenschutz-Checkbox). Neue Seiten in den Pages-Workflow (`cp`-Liste) aufnehmen.
 - **Cache-Busting:** CSS/JS immer als `style.css?v=dev` / `main.js?v=dev` einbinden; der Workflow ersetzt `dev` durch den Commit-Hash.
 - **Medien:** Bilder als WebP, Videos als H.264-MP4 (`+faststart`), Metadaten entfernen (`-map_metadata -1`). Befehle in `DOKU.md`.
 - **Handy zuerst:** Die meisten Besucher kommen über Instagram. Änderungen immer bei 375 px prüfen; Handy-Aktionsleiste (`.mobilebar`) und Touch-Ziele ≥ 44 px beibehalten.

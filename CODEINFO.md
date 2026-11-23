@@ -11,8 +11,9 @@ Statische Webseite ohne Build-Schritt und ohne Abhängigkeiten: drei HTML-Seiten
 ```
 index.html                 Startseite (One-Page): Hero mit Hintergrundvideo, Laufband, Über uns,
                            Leistungen (Tabs), Komplettpakete, Galerie, Kontakt, Handy-Aktionsleiste
-impressum.html             Impressum (Entwurf mit Platzhaltern)
-datenschutz.html           Datenschutzerklärung (Entwurf mit Platzhaltern)
+impressum.html             Impressum
+datenschutz.html           Datenschutzerklärung
+danke.html                 Bestätigungsseite nach dem Formularversand (FormSubmit `_next`)
 robots.txt
 assets/
   css/style.css            Komplettes Styling inkl. Design-Tokens und Breakpoints
@@ -41,6 +42,7 @@ assets/
 - Bild-Fallback nur bei echtem Ladefehler (`is-missing`).
 - Hero-Video: wählt `data-src-mobile` bis 760 px, sonst `data-src`; nicht bei `prefers-reduced-motion`/Datensparmodus; pausiert außerhalb des Viewports.
 - Tabs (ARIA-Tabs mit Pfeiltasten); ohne JS bleiben alle Panels sichtbar. Links auf `#aussen/#innen/#zusatz` öffnen den passenden Tab.
+- Anfrage-Popup (`<dialog id="anfrage">`): öffnet über `[data-open-form]` (optional `data-service` zur Vorauswahl), Validierung, Versand per Formular-POST an FormSubmit, `_next` → `danke.html`.
 - Galerie-Pfeile (scrollen um 80 % der Breite), Handy-Aktionsleiste (sichtbar nach dem Hero, ausgeblendet im Kontaktbereich), aktiver Nav-Punkt, Jahreszahl.
 
 ## Zusammenspiel / Datenfluss

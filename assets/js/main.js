@@ -158,6 +158,80 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contact) new IntersectionObserver(([e]) => { atContact = e.isIntersecting; render(); }, { threshold: 0.25 }).observe(contact);
   }
 
+  /* ---------- Anfrage-Popup (Versand über FormSubmit, wie bei Hage Bedachungen) ---------- */
+  const modal = document.getElementById("anfrage");
+  const form = document.getElementById("anfrage-form");
+  if (modal && form && typeof modal.showModal === "function") {
+    let lastTrigger = null;
+    const service = form.querySelector("#f-service");
+    const open = (trigger) => {
+      lastTrigger = trigger || null;
+      const wanted = trigger && trigger.dataset.service;
+      if (wanted && service) service.value = wanted;
+      document.documentElement.classList.add("modal-open");
+      modal.showModal();
+      const first = form.querySelector("#f-name");
+      if (first && !isSmall) first.focus();
+    };
+    const close = () => modal.close();
+    modal.addEventListener("close", () => {
+      document.documentElement.classList.remove("modal-open");
+      if (lastTrigger) lastTrigger.focus();
+    });
+    // Klick auf den abgedunkelten Hintergrund schließt
+    modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+    modal.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", close));
+    document.querySelectorAll("[data-open-form]").forEach((el) => {
+      el.addEventListener("click", (e) => { e.preventDefault(); open(el); });
+    });
+
+    // Nach dem Versand auf die eigene Danke-Seite zurückleiten
+    const next = form.querySelector("[data-next]");
+    if (next) next.value = new URL("danke.html", window.location.href).href;
+
+    // Validierung: Fehler unter dem Feld, beim Verlassen und beim Absenden
+    const rules = {
+      "f-name": (el) => el.value.trim().length >= 2,
+      "f-tel": (el) => el.value.replace(/[^0-9]/g, "").length >= 6,
+      "f-mail": (el) => el.value.trim() === "" || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim()),
+      "f-consent": (el) => el.checked,
+    };
+    const check = (el) => {
+      const ok = rules[el.id](el);
+      el.setAttribute("aria-invalid", String(!ok));
+      const err = document.getElementById(el.id + "-err");
+      if (err) err.hidden = ok;
+      return ok;
+    };
+    Object.keys(rules).forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("blur", () => { if (el.value !== "" || el.type === "checkbox") check(el); });
+      el.addEventListener(el.type === "checkbox" ? "change" : "input", () => {
+        if (el.getAttribute("aria-invalid") === "true") check(el);
+      });
+    });
+    form.addEventListener("submit", (e) => {
+      const invalid = Object.keys(rules).map((id) => document.getElementById(id)).filter((el) => el && !check(el));
+      if (invalid.length) {
+        e.preventDefault();
+        invalid[0].focus();
+        return;
+      }
+      const btn = form.querySelector("[data-submit]");
+      const label = form.querySelector("[data-submit-label]");
+      if (btn) btn.disabled = true;
+      if (label) label.textContent = "Wird gesendet …";
+    });
+    // Zurück-Navigation (bfcache): Button wieder freigeben
+    window.addEventListener("pageshow", () => {
+      const btn = form.querySelector("[data-submit]");
+      const label = form.querySelector("[data-submit-label]");
+      if (btn) btn.disabled = false;
+      if (label) label.textContent = "Anfrage senden";
+    });
+  }
+
   /* ---------- Aktiver Navigationspunkt ---------- */
   const links = [...document.querySelectorAll(".nav__link[href^='#']")];
   const targets = links.map((l) => document.querySelector(l.getAttribute("href"))).filter(Boolean);

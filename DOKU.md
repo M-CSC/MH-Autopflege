@@ -29,6 +29,17 @@ Keine Env-Variablen, keine Secrets. Alles steht im Markup bzw. in den CSS-Tokens
 
 **Sicherheit:** CSP per `<meta http-equiv="Content-Security-Policy">` in allen drei HTML-Dateien (`'self'` für alles, keine Inline-Scripts/-Styles). Neue externe Einbindungen (Maps, Fonts, Analytics) brechen die CSP bewusst und erfordern zusätzlich eine Anpassung der Datenschutzerklärung. GitHub Pages erlaubt keine eigenen HTTP-Header (z. B. `X-Frame-Options`); dafür wäre ein Proxy/CDN (z. B. Cloudflare) nötig.
 
+## Anfrageformular (FormSubmit)
+
+Das Formular öffnet sich als Popup über alle „Termin vereinbaren“-Buttons und die Paket-Pfeile (Paket wird vorausgewählt). Versand – wie bei Hage Bedachungen – über **FormSubmit** (`formsubmit.co`) an `autopflege.detailingmh@gmail.com`; danach Weiterleitung auf `danke.html`.
+
+- **Einmalig aktivieren:** Beim ersten echten Absenden schickt FormSubmit einen Aktivierungslink an `autopflege.detailingmh@gmail.com`. Erst nach dem Klick darauf werden Anfragen zugestellt. Danach ggf. Spam-Ordner prüfen.
+- Hidden-Felder in `index.html` (`#anfrage-form`): `_subject`, `_captcha=false`, `_template=table`, `_next` (per JS auf `danke.html` gesetzt), Honeypot `_honey`.
+- Pflichtfelder: Name, Telefon, Datenschutz-Checkbox (Prüfung in `main.js`, Fehler unter dem Feld).
+- CSP erlaubt dafür `form-action https://formsubmit.co`.
+- Datenschutzerklärung Abschnitt 5 „Anfrageformular (FormSubmit)“.
+- **Offen:** Auftragsverarbeitungsvertrag (AVV) mit FormSubmit prüfen/abschließen.
+
 ## Deployment (GitHub Pages)
 
 Workflow: `.github/workflows/pages.yml` – läuft bei jedem Push auf `main` und manuell (`Actions → Deploy GitHub Pages → Run workflow`).
@@ -114,6 +125,8 @@ GitHub Pages lässt Dateien ca. 10 Minuten im Browser-Cache. Damit nach einem De
 - Nach Inhaltsänderungen: lokal prüfen (`python3 -m http.server 8080`), dann auf `main` pushen → Pages deployt in ca. 1–2 Minuten.
 
 ### Offene Punkte
+
+- FormSubmit einmalig aktivieren (Aktivierungslink im Postfach nach der ersten Anfrage) und AVV prüfen.
 
 - Original-Logodatei (SVG/PNG) – aktuell aus Foto freigestellt.
 - Weitere Fotos (z. B. Innenraum, Motorraum, Felgen) können die Bildblöcke der Leistungen ergänzen/ersetzen.
