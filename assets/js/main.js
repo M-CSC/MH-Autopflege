@@ -31,10 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- Fehlende Bilder: Platzhalter statt kaputtem Bild ---------- */
+  // Nur echte Ladefehler werten. Lazy-Bilder nicht über img.complete prüfen:
+  // Safari meldet complete=true, solange ein Lazy-Bild noch gar nicht geladen wurde.
   document.querySelectorAll(".media img, .hero__media img").forEach((img) => {
     const markMissing = () => img.parentElement.classList.add("is-missing");
-    if (img.complete && img.naturalWidth === 0) markMissing();
-    else img.addEventListener("error", markMissing, { once: true });
+    img.addEventListener("error", markMissing, { once: true });
+    if (img.loading !== "lazy" && img.complete && img.currentSrc && img.naturalWidth === 0) markMissing();
   });
 
   /* ---------- Videos: fehlende ausblenden, Sektion nur zeigen, wenn mind. eins da ist ---------- */
