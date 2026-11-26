@@ -17,13 +17,13 @@ Keine Env-Variablen, keine Secrets. Alles steht im Markup bzw. in den CSS-Tokens
 | Was | Wert |
 |---|---|
 | Inhaber | Markus Hopp |
-| Anschrift | Junkerstraße 45, 53567 Buchholz (Westerwald) – auf der Startseite nur der Ort |
+| Anschrift | Am Siemensbach 3, 53757 Sankt Augustin (NRW) – Kontaktbereich, Footer, Impressum, Datenschutz, Maps-Link „Route planen“ |
 | Telefon / WhatsApp | `0157 81280442` (`tel:+4915781280442`, `https://wa.me/4915781280442`) |
 | E-Mail | `autopflege.detailingmh@gmail.com` |
 | Instagram | `https://www.instagram.com/mh_autopflege` |
 | Umsatzsteuer | Kleinunternehmer nach § 19 UStG (Hinweis im Impressum und bei den Preisen) |
 
-**Rechtstexte:** Impressum nach § 5 DDG / § 18 Abs. 2 MStV, Datenschutzerklärung beschreibt den tatsächlichen Stand (GitHub Pages, keine Cookies/Tracking, nur Links zu WhatsApp/Instagram, E-Mail über Gmail, Aufsicht RLP). Bei neuen Diensten (z. B. Formular, Karte, Analyse, Einbettungen) Datenschutzerklärung anpassen und CSP prüfen.
+**Rechtstexte:** Impressum nach § 5 DDG / § 18 Abs. 2 MStV, Datenschutzerklärung beschreibt den tatsächlichen Stand (GitHub Pages, keine Cookies/Tracking, nur Links zu WhatsApp/Instagram, E-Mail über Gmail, FormSubmit-Formular, Aufsicht NRW). Bei neuen Diensten (z. B. Formular, Karte, Analyse, Einbettungen) Datenschutzerklärung anpassen und CSP prüfen.
 
 **Design anpassen:** Farben/Abstände in `assets/css/style.css` unter `:root`. Akzentfarbe = `--color-accent` (aktuell Studio-Blau `#6b84ff`, 6:1 Kontrast auf Schwarz – bei Änderung mind. 4.5:1 einhalten).
 
